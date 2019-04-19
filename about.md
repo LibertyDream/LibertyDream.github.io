@@ -4,12 +4,10 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+本博客为个人学习git、GitHub和GitLab期间所建，[学习笔记](https://github.com/LibertyDream/git_github_gitlab_tutorial)
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[mfx660@163.com](mailto:mfx660@163.com)
