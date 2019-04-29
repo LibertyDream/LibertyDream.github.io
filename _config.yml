@@ -1,87 +1,114 @@
-#
-# This file contains configuration flags to customize your site
-#
+# Site settings
+title: 明月轩
+SEOTitle: 明月轩 | LibertyDream
+header-img: img/post-bg-desk.jpg
+email: mfx660@163.com
+description: "保持饥饿，保持愚蠢"
+keyword: "LibertyDream,明月轩,ML,python,Data Science"
+url: "https://LibertyDream.github.io"          # your host, for absolute URL
+baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
+github_repo: "https://github.com/LibertyDream/LibertyDream.github.io.git" # you code repository
 
-# Name of your site (displayed in the header)
-name: 明月轩
-
-# Short bio or description (displayed in the header)
-description: 保持饥饿，保持愚蠢
-
-# URL of your avatar or profile pic (you could use your GitHub profile pic)
-https://github.com/LibertyDream/LibertyDream.github.io/blob/master/images/xiaoming.jpg
-#https://gravatar.com/avatar/0edd6f1c1ab833589abad878c1022c05?s=400&d=robohash&r=x
-
-#
-# Flags below are optional
-#
-
-# Includes an icon in the footer for each username you enter
-footer-links:
-  dribbble:
-  email: mfx660@163.com
-  facebook:
-  flickr:
-  github: LibertyDream/
-  instagram:
-  linkedin:
-  pinterest:
-  rss: # just type anything here for a working RSS icon
-  twitter: #
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
-  youtube: # channel/<your_long_string> or user/<user-name>
-  googleplus: # anything in your profile username that comes after plus.google.com/
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "Tear down the wall in your mind."
+sidebar-avatar: /img/sidebar_icon.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
-# Enter your Disqus shortname (not your username) to enable commenting on posts
-# You can find your shortname on the Settings page of your Disqus account
-disqus:
 
-# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics:
+# SNS settings
+RSS: false
+weibo_username:     小骡汤米
+# zhihu_username:     qiubaiying
+github_username:    LibertyDream
+#facebook_username:  baiying.qiu.7
+#jianshu_username:   e71990ada2fd
+#twitter_username:   qiubaiying
 
-# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
-# Used for Sitemap.xml and your RSS feed
-url:
 
-# If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
-# then add in the baseurl here, like this: "/repository-name"
-baseurl: ""
 
-#
-# !! You don't need to change any of the configuration flags below !!
-#
 
-permalink: /:title/
+# Build settings
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
-# The release of Jekyll Now that you're using
-version: v1.2.0
 
-# Jekyll 3 now only supports Kramdown for Markdown
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+gems: [jekyll-paginate]
+
+
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+highlighter: rouge
 kramdown:
-  # Use GitHub flavored markdown, including triple backtick fenced code blocks
-  input: GFM
-  # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    # Use existing pygments syntax highlighting css
-    css_class: 'highlight'
+  input: GFM                            # use Github Flavored Markdown !important
 
-# Set the Sass partials directory, as we're using @imports
-sass:
-  style: :expanded # You might prefer to minify using :compressed
 
-# Use the following plug-ins
-gems:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
 
-# Exclude these files from your production _site
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - LICENSE
-  - README.md
-  - CNAME
+# 评论系统
+# Disqus（https://disqus.com/）
+disqus_username: danielmeng
+
+# Gitalk
+gitalk:
+  enable: true    #是否开启Gitalk评论
+  clientID: 3effed0a682519fd4fd9                            #生成的clientID
+  clientSecret: f057af57d4ceb7d5cce695740ea8d28bcb194382    #生成的clientSecret
+  repo: LibertyDream.github.io    #仓库名称
+  owner: LibertyDream    #github用户名
+  admin: LibertyDream
+  distractionFreeMode: true #是否启用类似FB的阴影遮罩
+
+
+# 统计
+
+# Analytics settings
+# Baidu Analytics
+ba_track_id: f76567258c8a27113c063ed246d9b54c
+
+# Google Analytics
+ga_track_id: 'UA-139231129-1'            # Format: UA-xxxxxx-xx
+ga_domain: auto              # 默认的是 auto, 这里我是自定义了的域名，你如果没有自己的域名，需要改成auto
+
+
+
+
+
+# Featured Tags
+featured-tags: true                     # 是否使用首页标签
+featured-condition-size: 1              # 相同标签数量大于这个数，才会出现在首页
+
+
+
+# Progressive Web Apps
+chrome-tab-theme-color: "#000000"
+service-worker: true
+
+
+
+# Friends
+friends: [
+   # {
+    #    title: "WY",
+   #     href: "http://zhengwuyang.com"
+    #},{
+    #    title: "简书·BY",
+   #     href: "http://www.jianshu.com/u/e71990ada2fd"
+    #},{
+    #    title: "Apple",
+   #     href: "https://apple.com"
+   # },{
+    #    title: "Apple Developer",
+    #    href: "https://developer.apple.com/"
+   # }
+]
