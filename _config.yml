@@ -1,9 +1,9 @@
 # Site settings
 title: 明月轩
-SEOTitle: 明月轩 | LibertyDream
+SEOTitle: -明月轩-
 header-img: img/post-bg-desk.jpg
 email: mfx660@163.com
-description: "保持饥饿，保持愚蠢"
+description: "Stay hungry, stay foolish"
 keyword: "LibertyDream,明月轩,ML,python,Data Science"
 url: "https://LibertyDream.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
@@ -18,7 +18,7 @@ sidebar-avatar: /img/sidebar_icon.jpg      # use absolute URL, seeing it's used 
 
 # SNS settings
 RSS: false
-weibo_username:     小骡汤米
+weibo_username:     5347273436
 # zhihu_username:     qiubaiying
 github_username:    LibertyDream
 #facebook_username:  baiying.qiu.7
@@ -57,7 +57,7 @@ kramdown:
 
 # 评论系统
 # Disqus（https://disqus.com/）
-disqus_username: danielmeng
+# disqus_username: danielmeng
 
 # Gitalk
 gitalk:
@@ -98,17 +98,11 @@ service-worker: true
 
 # Friends
 friends: [
-   # {
-    #    title: "WY",
-   #     href: "http://zhengwuyang.com"
-    #},{
-    #    title: "简书·BY",
-   #     href: "http://www.jianshu.com/u/e71990ada2fd"
-    #},{
-    #    title: "Apple",
-   #     href: "https://apple.com"
-   # },{
-    #    title: "Apple Developer",
-    #    href: "https://developer.apple.com/"
-   # }
+    {
+        title: "开源中国",
+        href: "https://www.oschina.net/"
+    },{
+        title: "Kaggle",
+        href: "https://www.kaggle.com/"
+    }
 ]
