@@ -2,7 +2,7 @@
 
 
 
-[![知识共享署名-非商业性使用-相同方式共享 2.5 中国大陆许可协议](https://img.shields.io/badge/license-CC BY--NC--SA 2.5 CN-brightgreen.svg)](http://creativecommons.org/licenses/by-nc-sa/2.5/cn/)
+[![](https://img.shields.io/badge/license-CC BY--NC--SA 2.5 CN-brightgreen.svg)](http://creativecommons.org/licenses/by-nc-sa/2.5/cn/)
 
 基于 Jekyll 和 GitHub Pages 搭建的个人博客。感谢[qiubaiying](<https://github.com/qiubaiying>)提供的搭建教程与网页模板。
 
