@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      启程
+title:      Google Colab 入门
 subtitle:   答疑解惑的简明教程
 date:       2019-06-29
 author:     一轩明月
@@ -21,7 +21,7 @@ tags:
 
 快如闪电的处理速度只待君采撷。到底如何挥动这利剑，来这里你已经拜对了山门。
 
-![1561798172868](..\img\chapter\2019-06-29\2019-6-29-lightning.png)
+![1561798172868](../img/chapter/2019-06-29/2019-6-29-lightning.png)
 
 有些人或许不知道，Google 做了一件很酷的事，它提供基于 Jupyter Notebook 的免费云服务并白送 GPU 资源。这对于你改善编程技能是一个利好，更重要的是它让任何人都有机会使用流行库，比如 **TensorFlow**，**PyTorch**，**Keras** 和 **OpenCV** 等，开发属于自己的深度学习应用。
 
