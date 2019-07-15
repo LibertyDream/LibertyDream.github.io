@@ -9,7 +9,7 @@ catalog: 	 true
 tags:
     - trick
     - Google Colab
-	- Kaggle
+    - Kaggle
 ---
 
 # 在Google Colab上玩Kaggle
