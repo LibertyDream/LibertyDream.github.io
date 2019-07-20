@@ -4,7 +4,7 @@ title:      Google Colab 入门
 subtitle:   答疑解惑的简明教程
 date:       2019-06-29
 author:     一轩明月
-header-img: img/post-bg-coffee.jpeg
+header-img: img/post-bg-2015.jpg
 catalog: 	 true
 tags:
     - Colab

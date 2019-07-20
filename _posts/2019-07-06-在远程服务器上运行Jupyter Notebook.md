@@ -4,7 +4,7 @@ title:      在远程服务器上运行Jupyter NoteBook
 subtitle:   
 date:       2019-07-06
 author:     一轩明月
-header-img: img/post-bg-ios9-web.jpg
+header-img: img/post-bg-blue.jpg
 catalog: 	 true
 tags:
     - trick
