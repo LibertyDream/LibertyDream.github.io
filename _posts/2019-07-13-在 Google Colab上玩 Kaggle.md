@@ -20,7 +20,7 @@ tags:
 
 你已经知道哪里获取数据集，也知道自己希望它们在哪里进行运算处理。但是如何简单便捷的将数据从 Kaggle 导入 Google Colab呢？
 
-遇到Google Colab绝对是入行AI、Deep Learning和Machine Learning以来最令人欣喜的事情。它免费向人们提供GPU资源，如果你刚入行，就从Colab开始吧，我在[另一篇文章]([https://libertydream.github.io/2019/06/29/Google-Colab-%E5%85%A5%E9%97%A8/](https://libertydream.github.io/2019/06/29/Google-Colab-入门/))里介绍了怎么入门Google Colab。在Colab上导入、处理Kaggle数据的方法则总结成本文。
+遇到Google Colab绝对是入行AI、Deep Learning和Machine Learning以来最令人欣喜的事情。它免费向人们提供GPU资源，如果你刚入行，就从Colab开始吧，我在[另一篇文章](https://libertydream.github.io/2019/06/29/Google-Colab-入门/)里介绍了怎么入门Google Colab。在Colab上导入、处理Kaggle数据的方法则总结成本文。
 
 ![]( https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-07-13_run_in_rain.png)
 
