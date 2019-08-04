@@ -1,11 +1,10 @@
 ---
-layout:     post
-title:      用 Cython 加速你的 Python 代码
-subtitle:   
-date:       2019-07-27
-author:     一轩明月
+layout: post
+title: 用 Cython 加速你的 Python 代码  
+date: 2019-07-27
+author: 一轩明月
 header-img: img/post-bg-future.jpg
-catalog: 	 true
+catalog: true
 tags:
     - Cython
 ---

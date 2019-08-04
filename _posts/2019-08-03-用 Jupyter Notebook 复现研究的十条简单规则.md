@@ -1,14 +1,13 @@
 ---
-layout:     post
-title:      用 Jupyter Notebook 复现研究的十条简单规则
-subtitle:   
-date:       2019-08-03
-author:     一轩明月
+layout: post
+title: 用 Jupyter Notebook 复现研究的十条简单规则
+date: 2019-08-03
+author: 一轩明月
 header-img: img/post-bg-hacker.jpg
-catalog: 	 true
+catalog: true
 tags:
     - Jupyter Notebook
-	- Research
+    - Research
 ---
 
 # 用 Jupyter Notebook 复现研究的十条简单规则
