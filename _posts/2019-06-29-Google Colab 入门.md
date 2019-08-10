@@ -7,7 +7,7 @@ author:     一轩明月
 header-img: img/post-bg-2015.jpg
 catalog: 	 true
 tags:
-    - Colab
+    - Google Colab
     - Data Science
 ---
 
