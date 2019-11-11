@@ -4,10 +4,11 @@ title:  	图解 Transformer
 subtitle:   编码解码的故事
 date:       2019-11-02
 author:     一轩明月
-header-img: img/post-bg-future.jpg
+header-img: img/post-bg-hacker.jpg
 catalog: 	 true
 tags:
     - NLP
+    - Transformer
 ---
 
 > 文章编译自：
