@@ -10,8 +10,6 @@ tags:
     - Research
 ---
 
-# 用 Jupyter Notebook 复现研究的十条简单规则
-
 > 文章编译自：
 >
 > https://arxiv.org/abs/1810.08055

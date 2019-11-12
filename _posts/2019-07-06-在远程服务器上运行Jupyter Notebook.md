@@ -11,8 +11,6 @@ tags:
     - Jupyter Notebook
 ---
 
-# 在远程服务器上运行 Jupyter Notebook
-
 > 文章编译自：
 >
 > https://towardsdatascience.com/running-jupyter-notebooks-on-remote-servers-603fbcc256b3

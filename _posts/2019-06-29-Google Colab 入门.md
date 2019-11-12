@@ -8,10 +8,7 @@ header-img: img/post-bg-2015.jpg
 catalog: 	 true
 tags:
     - Google Colab
-    - Data Science
 ---
-
-# Google Colab 入门
 
 > 编译自:
 >

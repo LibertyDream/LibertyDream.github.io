@@ -10,8 +10,6 @@ tags:
     - Transformer
 ---
 
-# 论 Transformer 对 NLP 排行榜的破坏作用
-
 > 文章编译自：
 >
 > https://hackingsemantics.xyz/2019/leaderboards/

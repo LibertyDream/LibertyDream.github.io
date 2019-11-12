@@ -10,8 +10,6 @@ tags:
     - Python
 ---
 
-# Python3 技巧：处理 Windows 和 Mac/Linux 文件路径差异的窍门
-
 > 文章编译自：
 >
 > https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f

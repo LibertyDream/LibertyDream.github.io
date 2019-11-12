@@ -9,8 +9,6 @@ tags:
     - Cython
 ---
 
-# 用 Cython 加速你的 Python 代码
-
 > 文章编译自：
 >
 > https://towardsdatascience.com/speed-up-your-python-code-with-cython-8879105f2b6f

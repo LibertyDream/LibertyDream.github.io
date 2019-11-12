@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      在Google Colab上玩Kaggle
+title:      Colab + Kaggle 入门基础之数据导入
 subtitle:   纯新手教程
 date:       2019-07-13
 author:     一轩明月
@@ -11,8 +11,6 @@ tags:
     - Google Colab
     - Kaggle
 ---
-
-# 在Google Colab上玩Kaggle
 
 > 文章编译自：
 >
