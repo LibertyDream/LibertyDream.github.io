@@ -17,7 +17,7 @@ tags:
 >
 > 博客内含有数学公式，如果使用 Chrome 浏览器观看的话，可以添加这个[插件](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima)
 
-迁移模型（The Transformer)出自论文[Attention is All You Need](https://arxiv.org/abs/1706.03762) ，**借助注意力机制实现并行训练加速**。特定任务上的表现优于谷歌的神经机翻译模型（the Google Neural Machine Translation model）。
+Transformer 模型出自论文[Attention is All You Need](https://arxiv.org/abs/1706.03762) ，**借助注意力机制实现并行训练加速**。特定任务上的表现优于谷歌的神经机翻译模型（the Google Neural Machine Translation model）。
 
 # 顶层视角
 
@@ -184,7 +184,7 @@ $$X$$ 矩阵中的每一行对应输入序列中的一个词。这里再一次�
 
 ## 残差
 
-进一步之前还有一点小细节要说明，编码器中各子层（自关注，前馈网络）都会有一个残差连接过程，并接一步层标准化操作（ [layer-normalization](https://arxiv.org/abs/1607.06450) ，有助于缩短训练耗时）。
+进一步之前还有一点小细节要说明，编码器中各子层（自关注，前馈网络）都会有一个残差连接过程，并接一步层正则化操作（ [layer-normalization](https://arxiv.org/abs/1607.06450) ，有助于缩短训练耗时）。
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-11-02_transformer_resideual_layer_norm.png)
 
