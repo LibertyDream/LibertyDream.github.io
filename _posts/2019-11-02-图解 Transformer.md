@@ -184,7 +184,7 @@ $$X$$ 矩阵中的每一行对应输入序列中的一个词。这里再一次�
 
 ## 残差
 
-进一步之前还有一点小细节要说明，编码器中各子层（自关注，前馈网络）都会有一个残差连接过程，并接一步层正则化操作（ [layer-normalization](https://arxiv.org/abs/1607.06450) ，有助于缩短训练耗时）。
+进一步之前还有一点小细节要说明，编码器中各子层（自关注，前馈网络）都会有一个残差连接过程，并接一步层归一化操作（ [layer-normalization](https://arxiv.org/abs/1607.06450) ，有助于缩短训练耗时）。
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-11-02_transformer_resideual_layer_norm.png)
 
