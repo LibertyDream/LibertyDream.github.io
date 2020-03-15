@@ -126,7 +126,7 @@ $$
 $$
 \frac{\partial E}{\partial h_{i}}=\sum_{j=1}^{V} \frac{\partial E}{\partial u_{j}} \cdot \frac{\partial u_{j}}{\partial h_{i}}=\sum_{j=1}^{V} e_{j} \cdot w_{i j}^{\prime}:=\mathrm{EH}_{i}\\
 h_{i}=\frac{1}{C}\sum_{c=1}^{C}\sum_{k=1}^{V} x_{ck} \cdot w_{k i}\\
-\frac{\partial E}{\partial w_{k i}}=\frac{\partial E}{\partial h_{i}} \cdot \frac{\partial h_{i}}{\partial w_{k i}}=\mathrm{EH}_{i} \cdot \frac{1}{C}\sum_{c=1}^{C}\sum_{k=1}^{V} x_{ck}
+\frac{\partial E}{\partial w_{k i}}=\frac{\partial E}{\partial h_{i}} \cdot \frac{\partial h_{i}}{\partial w_{k i}}=\frac{1}{C}\sum_{c=1}^{C}\mathrm{EH}_{i}  x_{ci}
 $$
 
 
@@ -344,7 +344,7 @@ $$
 
 
 $$
-\log \sigma\left(v_c \cdot v_w\right)+\sum_{i=1}^{k} \mathbb{E}_{c_j\sim P_{n}(w)}\left[\log \sigma\left(-v_{c_j}^{\prime}\cdot v_{w}\right)\right]
+\log \sigma\left(v_c \cdot v_w\right)+\sum_{j=1}^{k} \mathbb{E}_{c_j\sim P_{n}(w)}\left[\log \sigma\left(-v_{c_j}^{\prime}\cdot v_{w}\right)\right]
 $$
 
 噪声分布 $$P_n(w)$$ 是一元分布（每个词的词频分布）的 $$\frac{3}{4}$$ 次方。也就是说负样本是正样本的 $$k$$ 倍，满足分布$$(w, c) \sim p_{w o r d s}(w) \frac{p_{contexts}(c)^{3 / 4}}{Z}$$，这里 $$p_{w o r d s}(w)$$ 和 $$p_{contexts}(c)$$ 分别是单词和其上下文的一元分布，$$Z$$ 是归一化常数，因为原始论文中的上下文只有一个词，所以  $$p_{words}=p_{contexts}=\frac{count(x)}{\lvert Text \rvert}$$
@@ -376,12 +376,11 @@ f(x)=\left\{\begin{array}{cc}
 \end{array}\right.
 $$
 
+$$V$$ 是词表大小，$$f$$ 是代表共现词对的权重，依靠变量与变量可取最大值的比作计算，原论文中取 $$x_{max} = 100$$。$$X$$ 是共现计数，$$X_{ij}$$ 表示词 $$j$$  出现时，词 $$i$$ 一同出现的概率。$$b_{i}$$ 和 $$\tilde{b}_{j}$$ 是为了保证 $$w^{T} \tilde{w}$$ 的对称性加上的偏置量。$$w_{i}^{T} \tilde{w}_{k}=\log \left(P_{i k}\right)=\log \left(X_{i k}\right)-\log \left(X_{i}\right),P_{i k}=\frac{X_{i k}}{X_{i}}$$。$$w$$ 是词向量，$$ \tilde{w}$$ 是独立的环境向量，原论文中取前后各 10 个词做上下文窗口
 
-$$V$$ 是词表大小，$$f$$ 是代表共现词对的权重。$$X$$ 是共现计数，$$X_{ij}$$ 表示词 $$j$$  出现时，词 $$i$$ 一同出现的概率。
+括号内的运算实际表示在向量空间内一个向量加上偏置后离另一个向量还有多远。有趣的是，研究人员发现这里幂指数 $$\alpha=\frac{3}{4}$$ 效果最佳，和 skip-gram 经验一致
 
-$$w_{i}^{T} \tilde{w}_{k}=\log \left(P_{i k}\right)=\log \left(X_{i k}\right)-\log \left(X_{i}\right),P_{i k}=\frac{X_{i k}}{X_{i}}$$。故括号内实际表示在向量空间内一个向量加上偏置后离另一个向量还有多远。有趣的是，研究人员发现这里幂指数 $$\alpha=\frac{3}{4}$$ 效果最佳，和 skip-gram 经验一致
-
-相较于 Glove，skip-gram 相当于预先决定好了权重参数 $$X_i$$ ，选择最小二乘作为向量距离度量方式，且省去了归一化操作，如果动态考虑词的权重，则二者是一致的。过程如下
+相较于 Glove，skip-gram 相当于预先决定好了权重参数 $$X_i$$ ，选择最小二乘作为向量距离度量方式，且省去了归一化操作，如果动态考虑词的权重，则二者是一致的。推理过程如下
 
 
 $$
@@ -401,13 +400,14 @@ $$
 $$
 
 
-防止 $$X_{ij}$$ 过大，取对数运算，则
+防止 $$X_{ij}$$ 过大，取对数运算，得到和上面 $$J$$ 很接近的 $$\hat{J}$$
 
 
 $$
 \hat{J} =\sum_{i, j} X_{i}\left(\log \hat{P}_{i j}-\log \hat{Q}_{i j}\right)^{2} =\sum_{i, j} X_{i}\left(w_{i}^{T} \tilde{w}_{j}-\log X_{i j}\right)^{2}
 $$
 
+原论文中取 $$W+\tilde{W}$$ 作词向量，向量超维度 200 之后收益率不高
 
 ### FastText
 
