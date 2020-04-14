@@ -2,7 +2,7 @@
 title: 明月轩
 SEOTitle: 明月轩 | LibertyDream
 header-img: img/home-bg-blue.jpg
-email: mfx660@163.com
+email: mfx660@gmail.com
 description: "世界需要连接，没啥不能破解，总还可以优化"
 keyword: "LibertyDream,明月轩,ML,python,Data Science"
 url: "https://LibertyDream.github.io"          # your host, for absolute URL
@@ -11,7 +11,7 @@ github_repo: "https://github.com/LibertyDream/LibertyDream.github.io.git" # you 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "Tear down the wall in your mind."
+sidebar-about-description: "Stay hungry. Stay foolish"
 sidebar-avatar: /img/sidebar_icon.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 

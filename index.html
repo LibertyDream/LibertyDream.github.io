@@ -1,6 +1,6 @@
 ---
 layout: page
-description: "Stay hungry, stay foolish."
+description: "世界需要连接，没啥不能破解，总还可以优化"
 ---
 
 {% for post in paginator.posts %}
@@ -14,8 +14,13 @@ description: "Stay hungry, stay foolish."
             {{ post.subtitle }}
         </h3>
         {% endif %}
-        <div class="post-content-preview">
+        <!--
+		<div class="post-content-preview">
             {{ post.content | strip_html | truncate:200 }}
+        </div>
+		-->
+		<div class="post-content-preview">
+            {{ post.excerpt | strip_html}}
         </div>
     </a>
     <p class="post-meta">
