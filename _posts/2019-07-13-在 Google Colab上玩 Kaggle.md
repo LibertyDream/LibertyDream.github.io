@@ -10,6 +10,7 @@ tags:
     - trick
     - Google Colab
     - Kaggle
+excerpt:   知道哪里获取数据集，也知道自己希望它们在哪里进行运算处理。但是如何简单便捷的将数据从 Kaggle 导入 Google Colab呢？ 
 ---
 
 > 文章编译自：

@@ -7,6 +7,7 @@ header-img: img/post-bg-future.jpg
 catalog: true
 tags:
     - Cython
+excerpt:    Python 运行效率上做出了很大的牺牲，为了提升速度可以考虑 Cython，它会将 Python 代码转为 C 程序，能便捷地整合到 Jupyer Notebook 等环境中，本文介绍了 Cython 的安装与使用方法，并展示了它的执行效率
 ---
 
 > 文章编译自：

@@ -9,6 +9,7 @@ catalog: 	 true
 tags:
     - trick
     - Jupyter Notebook
+excerpt:    Jupyter Notebook 是很多算法工程师研究 DL，做尝试的首选工具。但大数据或其他情况下可能本地电脑支撑不住，所以需要远程服务器支持。通过 SSH 命令可以远程使用服务器上的 Notebook 服务，通过端口访问，为方便可以写成脚本
 ---
 
 > 文章编译自：

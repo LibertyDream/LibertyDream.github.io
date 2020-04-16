@@ -9,6 +9,7 @@ catalog: 	 true
 tags:
     - NLP
     - Transformer
+excerpt:    图形化展示编码-解码（encoder-decoder）架构，逐步拆解编码器内部构造，剖析解码器内部原理。
 ---
 
 > 文章编译自：

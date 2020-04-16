@@ -8,6 +8,7 @@ catalog: true
 tags:
     - Jupyter Notebook
     - Research
+excerpt:    Jupyter Notebooks 降低了复现研究时的门槛，但是也有一些其独有的问题。比如很少一部分开源笔记能直接顺利运行，多数都有数据访问不到、依赖没解决或是平台差异的问题。本文提供了一系列规则、技巧、工具和样例 notebook 作参考，给出了在 notebook 开发流程各阶段需要注意的规则。
 ---
 
 > 文章编译自：

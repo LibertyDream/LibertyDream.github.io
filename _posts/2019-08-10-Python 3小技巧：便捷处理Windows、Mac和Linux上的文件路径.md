@@ -8,6 +8,7 @@ catalog: 	 true
 tags:
     - trick
     - Python
+excerpt:    路径分隔符在不同系统间的差异有时对编程来讲是个不大不小的烦恼，本文探讨了传统 os.path 模块和解决方案，并给出了更好的路径编码方式——使用 pathlib 模块
 ---
 
 > 文章编译自：

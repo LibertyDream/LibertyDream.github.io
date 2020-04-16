@@ -7,6 +7,7 @@ header-img: img/post-bg-rwd.jpg
 catalog: 	 true
 tags:
     - Jupyter Notebook
+excerpt:    原生 Jupyter Notebooks 界面十分简陋，缺少很多开发实用、用户友好的特性。本文列举了一些 Jupyter Notebooks 附加组件/扩展，以及一些能提高效率的 jupyter 命令。一切旨在强化 Jupyter Notebooks。
 ---
 
 Jupyter Notebooks 是机器学习和数据科学领域特别钟爱的 Python 编程环境。但是原生 Jupyter Notebooks 界面十分简陋，缺少很多开发实用、用户友好的特性。

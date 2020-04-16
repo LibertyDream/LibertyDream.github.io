@@ -10,6 +10,7 @@ tags:
     - math
     - embedding
     - NLP
+excerpt:    本文以历史沿革为主线，梳理了嵌入（embedding）技术的发展历程，从早期的 textRank 到 Doc2Vec，点出各技术的核心数理逻辑所在，重点介绍了 word2vec 及其优化逻辑
 ---
 
 > 文内有大量数学公式，chrome 浏览器可以安装[这个](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima)插件，以便浏览

@@ -8,6 +8,7 @@ header-img: img/post-bg-2015.jpg
 catalog: 	 true
 tags:
     - Google Colab
+excerpt:    Google Colab 提供了学生、研究者实践 ML/DL 所需的编码环境与硬件资源，特别是可以白嫖的 GPU，本文从网盘设置、新建文档起，手把手教你入门 Colab
 ---
 
 > 编译自:
