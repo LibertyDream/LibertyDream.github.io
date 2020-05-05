@@ -7,7 +7,7 @@ author:     一轩明月
 header-img: img/post-bg-2015.jpg
 catalog:    true
 tags:
-    - RNN
+    - attention
     - Transformer
 excerpt:    注意力无疑是近几年深度学习社区中十分流行的理念，同时也是一种很好用的工具。本文从注意力起源讲起，分门别类的介绍各种注意力机制与模型，比如 transformer 和 SNAIL，同时给出了相应的数学公式
 ---
