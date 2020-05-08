@@ -246,5 +246,76 @@ $$
 
 Transformer 一大核心优势在于对长文依赖的学习能力。视环境而定，模型有时可能会给远处内容更多关照，或者每个注意力头都有各自的注意力模式。如果在需要的时候，能灵活调整注意力间隔且只关注更远处的内容，就能减少计算量和记忆开销，从而扩大模型所能支持的最大上下文范围。
 
-这也正是**自适应注意力跨度（Adaptive Attention Span，[Sukhbaatar 等, 2019](https://arxiv.org/abs/1905.07799)）**的目标。
+这也正是**自适应注意力跨度（Adaptive Attention Span）**的目标。[Sukhbaatar 等, 2019](https://arxiv.org/abs/1905.07799) 提出了一种自注意机制，谋求对注意力跨度进行优化。该团队假设不同注意力头会对相同上下文窗口打不同的分数（见下图），所以优化跨度就该每个头独自训练。
+
+![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_attention-per-head.png)
+
+_A 和 B 两个注意力头给相同上下文窗口打出了不同注意力分值，A 头更关注近期标识，而 B 头更在意过往内容的一致性_
+
+对于第 $$i$$ 个标识，要计算其与 $$j \in S_i$$ 处的其他键间的注意力权重，这里 $$S_i$$ 是 $$i$$ 处标识的上下文窗口。
+
+
+$$
+\begin{aligned}
+e_{ij} &= \mathbf{q}_i {\mathbf{k}_j}^\top \\ 
+a_{ij} &= \text{softmax}(e_{ij}) = \frac{\exp(e_{ij})}{\sum_{r=i-s}^{i-1} \exp(e_{ir})} \\
+\mathbf{y}_i &= \sum_{r=i-s}^{i-1}a_{ir}\mathbf{v}_r = \sum_{r=i-s}^{i-1}a_{ir}\mathbf{x}_r\mathbf{W}^v
+\end{aligned}
+$$
+
+
+_柔性遮罩函数（soft mask function）_ $$m_z$$ 将查询和键向量间的距离映射为 $$[0, 1]$$ 的区间值，从而有效调节注意力跨度。$$m_z$$ 经 $$z \in [0, s]$$  参数化，$$z$$ 要通过学习获得：
+
+
+$$
+m_z(x) = \text{clamp}(\frac{1}{R}(R+z-x), 0, 1)
+$$
+
+
+其中 $$R$$ 是用于指定 $$m_z$$ 柔性的超参数
+
+![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_soft-masking-function.png)
+
+柔性遮罩函数会参与到求解注意力权重对元素进行 softmax 变换的过程当中。
+
+
+$$
+a_{ij} = \frac{m_z(i-j)\exp(s_{ij})}{\sum_{r=i-s}^{i-1}m_z(i-r) \exp(s_{ir})}
+$$
+
+
+上式中的 $$z$$ 是可微的，故将其与模型其他部分一同联合训练。每个注意力头的参数 $$z^{(i)}, i=1, \dots, h$$  独立训练，同时还要在损失函数中加上对 $$\sum_{i=1}^h z^{(i)}$$ 的 $$L_1$$ 惩罚。
+
+如果是采用[自适应耗时](#自适应耗时（ACT）)，该方法能进一步增强注意力跨度的灵活性，根据当前输入动态变化。注意力头在 $$t$$ 时刻的间距参数 $$z_t$$ 是一个 s 型函数，$$z_t = S \sigma(\mathbf{v} \cdot \mathbf{x}_t +b)$$，其中向量 $$\mathbf{v}$$ 和偏置 $$b$$ 与其他参数一起联合训练。
+
+经过对带有自适应注意力跨度的 Transformer 的系列实验， [Sukhbaatar 等 (2019)](https://arxiv.org/abs/1905.07799) 发现了一些通行趋势。较低层次并不需要很长的注意力跨度，而对高层的一些注意力头可能需要非常长的跨度。此外，自适应跨度能大幅减少 FLOPS（浮点运算次数/秒） 数量，对那些有着许多注意力层和大范围上下文的模型尤为明显。
+
+## 小范围跨度（Image Transformer）
+
+原本也是最流行的 Transformer 用途是做语言模型，一维文本序列按时间顺序排好，此时注意力跨度随着上下文范围增大而线性增长。
+
+但如果想将 Transformer 用在图像上，就得先明白此时的上下文范围或次序的定义方式。 **Image Transformer** ([Parmer 等 2018](https://arxiv.org/abs/1802.05751))  在 Transformer 框架下找到了一种类似于序列模型的图像生成方式，同时将自注意范围局限于 _局部_ 近邻之上，从而使模型能并行处理更多图像并保证似然损失不难处理。
+
+该语境下编码器-解码器框架得以保留：
+
+- 编码器会基于原图生成上下文相关的单像素通道表示
+- 解码器则会 _自回归_ 生成输出图像，每个时步每个像素一个通道
+
+定义当前要生成的像素表示为查询 $$\mathbf{q}$$ 。其他用于计算 $$\mathbf{q}$$ 的各处表示定义为键向量  $$\mathbf{k}_1, \mathbf{k}_2, \dots$$ 它们共同组成记忆矩阵  $$\mathbf{M}$$。 $$\mathbf{M}$$ 的范围决定了像素查询 $$\mathbf{q}$$ 的上下文窗口大小。
+
+Image Transformer 一共有两种小范围 $$\mathbf{M}$$ ，如下图所示
+
+![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_image-transformer-attention.png)
+
+_图中展示了视觉输入的 1D 和 2D 注意力跨度，黑线标出了查询块，青绿色的轮廓则是像素 q 的实际注意力范围_
+
+（1）_1D 局部注意力_：输入图像扁平化为[光栅扫描](https://en.wikipedia.org/wiki/Raster_scan#Scanning_pattern)序列，即从左到右，从上而下。接着线性化图形被分为若干不重叠的查询块。上下文窗口由同处查询块 $$\mathbf{q}$$ 中的像素以及固定数量的之前生成的若干像素组成
+
+（2）_2D 局部注意力_：图像分成多个不重叠的矩形查询块，待查像素能看到相同记忆块中的其他像素。为了使左上角的像素同样有合理的上下文窗口，记忆块分别向上，向左和向右进行定额拓展
+
+# 降低时间与记忆开销
+
+这一部分主要介绍几种对 Transformer 的改进，以降低耗时，减少记忆开销
+
+**Sparse Transformer** ([Child 等, 2019](https://arxiv.org/abs/1904.10509)) 提出 _因子分解自注意_ 模型，通过对稀疏矩阵进行因子分解使得在长达 16,384 的序列上训练百层稠密注意力网络成为可能，否则这对当代硬件设备来说是不可能的。
 
