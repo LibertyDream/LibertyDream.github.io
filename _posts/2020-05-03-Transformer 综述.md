@@ -317,5 +317,69 @@ _图中展示了视觉输入的 1D 和 2D 注意力跨度，黑线标出了查�
 
 这一部分主要介绍几种对 Transformer 的改进，以降低耗时，减少记忆开销
 
-**Sparse Transformer** ([Child 等, 2019](https://arxiv.org/abs/1904.10509)) 提出 _因子分解自注意_ 模型，通过对稀疏矩阵进行因子分解使得在长达 16,384 的序列上训练百层稠密注意力网络成为可能，否则这对当代硬件设备来说是不可能的。
+## 稀疏注意力矩阵分解
 
+vanilla Transformer 的计算和记忆开销与序列长度二次方成正比，所以很难用到超长序列上。
+
+**Sparse Transformer** ([Child 等, 2019](https://arxiv.org/abs/1904.10509)) 提出 _因子分解自注意_ 模型，通过对稀疏矩阵进行因子分解使得在长达 16,384 的序列上训练百层稠密注意力网络成为可能，否则这对当代硬件设备来说是不可能的任务。
+
+考虑系列连接模式 $$\mathcal{S} = \{S_1, \dots, S_n\}$$，其中 $$S_i$$ 记录了第 $$i$$ 个查询向量要处理的一组键位值。
+
+
+$$
+\begin{aligned}
+\text{Attend}(\mathbf{X}, \mathcal{S}) &= \Big( a(\mathbf{x}_i, S_i) \Big)_{i \in \{1, \dots, L\}} \\
+\text{ where } a(\mathbf{x}_i, S_i) &= \text{softmax}\Big(\frac{(\mathbf{x}_i \mathbf{W}^q)(\mathbf{x}_j \mathbf{W}^k)_{j \in S_i}^\top}{\sqrt{d_k}}\Big) (\mathbf{x}_j \mathbf{W}^v)_{j \in S_i}
+\end{aligned}
+$$
+
+
+注意 $$S_i$$ 的大小不固定，$$a(\mathbf{x}_i, S_i)$$ 大小恒定为 $$d_v$$ ，进而 $$\text{Attend}(\mathbf{X}, \mathcal{S}) \in \mathbb{R}^{L \times d_v}$$。
+
+反回归模型中，注意力跨度被定义为 $$S_i = \{j: j \leqslant i\}$$ ，即让每个标识同时关照此前所有位置。
+
+而在因子分解自注意模型中，集合 $$S_i$$ 被拆分为依赖树，从而对每对 $$(i, j)，j \leqslant i$$ 而言都存在连通路径，且 $$i$$ 可以直接或间接的关照到 $$j$$ 。
+
+确切地讲，集合 $$S_i$$ 被分为 $$\mathbf{p}$$ 个不重叠子集，第 $$m$$ 个子集记为 $$A^{(m)}_i \subset S_i, m = 1,\dots, p$$ 所以输出位置 $$i$$ 和任意 $$j$$ 间都有最大距离 $$p+1$$。比如，如果 $$(j,a,b,c,\dots,i)$$ 是 $$i$$ 和$$j$$ 间的索引，有 $$j \in A_a^{(1)}, a \in A_b^{(2)}, b \in A_c^{(3)}, \dots$$ 以此类推
+
+### 稀疏注意力因子分解
+
+Sparse Transformer 提出两种类型的因子分解注意力。下面以 2D 图像输入为例作展示
+
+![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_sparse-attention.png)
+
+第一行展示了(a) Transformer，(b) 跨位注意Sparse Transformer 和 (c) 固定注意 Sparse Transformer 三种形态下的注意力连接模式。第二行是对应自注意连接矩阵，要强调的是上下两行尺度并不相同。
+
+（1）_跨位_ 注意力一般带有步幅 $$\ell \sim \sqrt{n}$$。当图像数据以步幅结构化对齐时这种方式效果良好。图像案例中，每个像素会以光栅扫描顺序（自然覆盖了整个图像宽度）关照此前 $$\ell$$ 个像素点，接着这些像素点会关照同一列的其他像素（以另一种注意力连接方式）。
+
+
+$$
+\begin{aligned}
+A_i^{(1)} &= \{ t, t+1, \dots, i\} \text{, where } t = \max(0, i - \ell) \\
+A_i^{(2)} &= \{j: (i-j) \mod \ell = 0\}
+\end{aligned}
+$$
+
+
+（2）_固定_ 注意力。一小批标识总结了之前位置的信息并向所有之后的位置广播相关信息。
+
+
+$$
+\begin{aligned}
+A_i^{(1)} &= \{j: \lfloor \frac{j}{\ell} \rfloor = \lfloor \frac{i}{\ell} \rfloor \} \\
+A_i^{(2)} &= \{j: j \mod \ell \in \{\ell-c, \dots, \ell-1\} \}
+\end{aligned}
+$$
+
+
+其中 $$c$$ 是超参数，如果 $$c=1$$ 则限制表示，而许多表示依赖于少数位置。论文对  $$\ell \in \{ 128, 256 \}$$ 选择了 $$c\in \{ 8, 16, 32 \}$$
+
+### Transformer 里的因子分解自注意
+
+有三种方式将稀疏因子分解注意力用到 Transformer 体系中：
+
+1. 每个残差块一种注意力然后穿插交织。<br/> $$\text{attention}(\mathbf{X}) = \text{Attend}(\mathbf{X}, A^{(n \mod p)}) \mathbf{W}^o$$ ，其中当前残差块索引为 $$n$$
+2. 设置一个所有因子分解头都要关照的头。<br/>$$\text{attention}(\mathbf{X}) = \text{Attend}(\mathbf{X}, \cup_{m=1}^p A^{(m)}) \mathbf{W}^o $$。
+3. 使用多头注意力机制，但与 vanilla Transformer 不同的是，每个头可能会采用上述模式之一，1 或 2 => 这么选通常效果最好
+
+Sparse Transformer 还提出了一系列变革从而能训练上百层 Transformer，包括梯度检查点，反向传播时重计算注意力与 FF 层，混合精度训练，高效稀疏块的实现等等。更多相关内容请看[论文](https://arxiv.org/abs/1904.10509)
