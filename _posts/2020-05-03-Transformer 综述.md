@@ -9,7 +9,7 @@ catalog:    true
 tags:
     - attention
     - Transformer
-excerpt:    各式强化版 Transformer 模型已是层出不穷，而本文力图展示朴实无华的 Transformer 是怎么改进用于超长注意力跨度，降低记忆和计算消耗，应用于强化学习任务等等
+excerpt:    各式强化版 Transformer 模型已是层出不穷，本文揭示了怎样改进“朴素” Transformer 以用于超长注意力跨度，减少记忆和计算开销以及强化学习的适配等多种场景
 ---
 
 > 编译自：The Transformer Family，[Lilian Weng](https://lilianweng.github.io/lil-log/)
@@ -22,26 +22,26 @@ excerpt:    各式强化版 Transformer 模型已是层出不穷，而本文力�
 | $$h$$                                                        | 多头注意力层中头的数量                                       |
 | $$L$$                                                        | 输入序列片段长度                                             |
 | $$\mathbf{X} \in \mathbb{R}^{L \times d}$$                   | 输入序列，其中每个元素都已映射为 $$d$$ 维嵌入向量，和模型尺寸相当 |
-| $$\mathbf{W}^k \in \mathbb{R}^{d \times d_k}$$               | The key weight matrix.                                       |
-| $$\mathbf{W}^q \in \mathbb{R}^{d \times d_k}$$               | The query weight matrix.                                     |
+| $$\mathbf{W}^k \in \mathbb{R}^{d \times d_k}$$               | 键权重矩阵                                                   |
+| $$\mathbf{W}^q \in \mathbb{R}^{d \times d_k}$$               | 查询权重矩阵                                                 |
 | $$\mathbf{W}^v \in \mathbb{R}^{d \times d_v}$$               | 值权重矩阵，一般有 $$d_k = d_v = d$$                         |
 | $$\mathbf{W}^k_i, \mathbf{W}^q_i \in \mathbb{R}^{d \times d_k/h}; \mathbf{W}^v_i \in \mathbb{R}^{d \times d_v/h}$$ | 每个头对应的权重矩阵                                         |
 | $$\mathbf{W}^o \in \mathbb{R}^{d_v \times d}$$               | 输出权重矩阵                                                 |
 | $$\mathbf{Q} = \mathbf{X}\mathbf{W}^q \in \mathbb{R}^{L \times d_k}$$ | 嵌入输入的查询                                               |
 | $$\mathbf{K} = \mathbf{X}\mathbf{W}^k \in \mathbb{R}^{L \times d_k}$$ | 嵌入输入的键                                                 |
 | $$\mathbf{V} = \mathbf{X}\mathbf{W}^v \in \mathbb{R}^{L \times d_v}$$ | 嵌入输入的值                                                 |
-| $$S_i$$                                                      | 第 $$i$$ 个查询 $$\mathbf{q}_i$$ 要处理的键位置集合          |
+| $$S_i$$                                                      | 第 $$i$$ 个查询 $$\mathbf{q}_i$$ 要关照的键位集合            |
 | $$\mathbf{A} \in \mathbb{R}^{L \times L}$$                   | 输入序列长度为 $$L$$ 的自注意矩阵 $$\mathbf{A} = \text{softmax}(\mathbf{Q}\mathbf{K}^\top / \sqrt{d_k})$$ |
 | $$a_{ij}\in \mathbf{A}$$                                     | 查询 $$\mathbf{q}_i$$ 和键  $$\mathbf{k}_j$$ 间的注意力大小  |
 | $$\mathbf{P} \in \mathbb{R}^{L\times d}$$                    | 位置编码矩阵，第 $$i$$ 行 $$\mathbf{p}_i$$ 是输入 $$\mathbf{x}_i$$ 的位置编码 |
 
 # 注意力与自注意
 
-_注意力_ 是神经网络的一种机制，拥有该机制的模型能学会有选择地处理给定数据集以作预测。投放的注意力大小取决于习得权重，因而模型输出结果通常是加权平均的形式。
+_注意力_ 是神经网络的一种机制，拥有该机制的模型能学会有选择地关照给定数据集以作预测。投放注意力大小取决于习得权重，因而模型输出结果通常是加权平均的形式。
 
-_自注意_ 是注意力机制中的一种，模型通过观察样本中的其余部分来对该样本中的目标位置进行预测，直观感觉它很像是[非局部平均](https://en.wikipedia.org/wiki/Non-local_means)。同时留意自注意具有排列不变性，换句话说它是一种集合运算。
+_自注意_ 是注意力机制中的一种，模型通过观察样本中的其余部分来对该样本中的目标位置进行预测，直观上很像[非局部平均](https://en.wikipedia.org/wiki/Non-local_means)。同时要知道自注意具有排列不变性，换句话说它是一种集合上的运算。
 
-注意力/自注意的形式五花八门，Transformer ([Vaswani 等, 2017](https://arxiv.org/abs/1706.03762)) 采用的是 _比例点击注意力_ ：给定查询矩阵 $$\mathbf{Q}$$ ，键矩阵 $$\mathbf{K}$$ 和值矩阵 $$\mathbf{V}$$ ,输出结果就是值向量的加权和，而各个值分得的权重则由查询和键向量的点积结果决定：
+注意力/自注意的形式五花八门，Transformer ([Vaswani 等, 2017](https://arxiv.org/abs/1706.03762)) 采用的是 _比例点积注意力_ ：给定查询矩阵 $$\mathbf{Q}$$ ，键矩阵 $$\mathbf{K}$$ 和值矩阵 $$\mathbf{V}$$ ,输出结果就是值向量的加权和，而各个值分得的权重则由查询和键向量的点积结果决定：
 $$
 \text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}(\frac{\mathbf{Q} {\mathbf{K}}^\top}{\sqrt{d_k}})\mathbf{V}
 $$
@@ -50,32 +50,32 @@ $$
 a_{ij} = \text{softmax}(\frac{\mathbf{q}_i {\mathbf{k}_j}^\top}{\sqrt{d_k}})
 = \frac{\exp(\mathbf{q}_i {\mathbf{k}_j}^\top)}{ \sqrt{d_k} \sum_{r \in S_i} \exp(\mathbf{q}_i {\mathbf{k}_r}^\top) }
 $$
-其中 $$S_i$$ 是第 $$i$$ 个查询要处理的键位置集合。
+其中 $$S_i$$ 是第 $$i$$ 个查询要关照的键位集合。
 
 > 更多注意力机制介绍可以看我的[另一篇文章](https://libertydream.github.io/2020/04/26/Attention-综述/)
 
 # 多头自注意力
 
-_多头自注意力单元_ 是 Transformer 的一个关键部件。相较于只计算一次注意力，多头机制将输入分成小块然后在各个子空间并行计算比例点击注意力。各个注意力结果简单拼接并线性转换为期望维度。
+_多头自注意力单元_ 是 Transformer 的一个关键部件。相较于只计算一次注意力，多头机制将输入分成小块然后在各个子空间并行计算比例点积注意力。各个注意力结果简单拼接并线性转换为期望维度。
 $$
 \begin{aligned}
 \text{MultiHeadAttention}(\mathbf{X}_q, \mathbf{X}_k, \mathbf{X}_v) &= [\text{head}_1; \dots; \text{head}_h] \mathbf{W}^o \\ 
 \text{where head}_i &= \text{Attention}(\mathbf{X}_q\mathbf{W}^q_i, \mathbf{X}_k\mathbf{W}^k_i, \mathbf{X}_v\mathbf{W}^v_i)
 \end{aligned}
 $$
-其中 $$[.;.]$$ 是拼接操作，权重矩阵 $$\mathbf{W}^q_i, \mathbf{W}^k_i \in \mathbb{R}^{d \times d_k/h}, \mathbf{W}^v_i \in \mathbb{R}^{d \times d_v/h}$$ 将大小为  $$L \times d$$ 的输入嵌入映射为查询，键和值矩阵。至于 $$\mathbf{W}^o \in \mathbb{R}^{d_v \times d}$$ 则是线性转换结果。所有权重在训练时一起进行学习。
+其中 $$[.;.]$$ 是拼接操作，权重矩阵 $$\mathbf{W}^q_i, \mathbf{W}^k_i \in \mathbb{R}^{d \times d_k/h}, \mathbf{W}^v_i \in \mathbb{R}^{d \times d_v/h}$$ 将大小为  $$L \times d$$ 的输入嵌入阵映射为查询，键和值矩阵。至于 $$\mathbf{W}^o \in \mathbb{R}^{d_v \times d}$$ 则是线性转换结果。所有权重在训练时一起进行学习。
 
 <img src="https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-27_multi-head-attention.png" style="zoom:33%;" />
 
 # Transformer
 
-**Transformer**（这里指代 vanilla Transformer，以和其他强化版做区分; [Vaswani 等, 2017](https://arxiv.org/abs/1706.03762)）模型采用编码器-解码器架构，这也是多数 [NMT](https://libertydream.github.io/2020/04/26/Attention-综述#为翻译而生)  模型所采用的模式。后来只采用编码器/解码器的 Transformer 在语言模型任务中取得了亮眼表现，比如 [BERT](https://libertydream.github.io/2019/11/16/NLP-迁移学习演化之路/) 和 [GPT-2](https://libertydream.github.io/2019/11/23/图解GPT-2/)
+**Transformer**（这里指代 vanilla Transformer，以和其他强化版做区分; [Vaswani 等, 2017](https://arxiv.org/abs/1706.03762)）模型采用编码器-解码器架构，这也是多数 [NMT](https://libertydream.github.io/2020/04/26/Attention-综述#为翻译而生)  模型所采用的模式。后来只采用编码器/解码器的 Transformer 在语言模型任务中取得了亮眼表现，比如 [BERT](https://libertydream.github.io/2019/11/16/NLP-迁移学习演化之路/) 和 [GPT-2](https://libertydream.github.io/2019/11/23/图解GPT-2/)。
 
 ### 编码器-解码器架构
 
-**编码器**可以生成基于注意力的表示，能从宽泛的上下文中定位特定信息片段。编码器由 6 个独立单元堆叠而成，每个单元又含两个子单元——一个 _多头注意力_ 层和一个 _逐点_ 全连接前馈网络。所谓“逐点”，就是说对序列中的每个元素都施加相同的线性变换（权重也相同）。这也可以看作是核大小为 1 的卷积层。每个子单元都是残差连接并要作层归一化处理。此外，所有子单元输出的都是相同的 $$d$$ 维数据。
+**编码器**可以生成基于注意力的表示，能从宽泛的上下文中定位特定信息片段。编码器由 6 个独立单元堆叠而成，每个单元又含两个子单元——一个 _多头注意力_ 层和一个 _逐点_ 全连接前馈网络。所谓“逐点”，就是说对序列中的每个元素都施加相同的线性变换（权重也相同）。这也可以看作是核大小为 1 的卷积层。每个子单元都以残差连接并经由层归一化处理。此外，所有子单元输出的都是相同的 $$d$$ 维数据。
 
-**解码器**的功用在于从编码过的表示中检索信息，其整体架构很像编码器，只是每个独立重复单元中有两个多头注意力子单元而非一个。第一个多头注意力子单元是“盖了” _遮罩（masked）_的，防止将来要处理的后续位置信息的干扰。
+**解码器**的功用在于从编码过的表示中检索信息，其整体架构很像编码器，只是每个独立重复单元中有两个多头注意力子单元而非一个。第一个多头注意力子单元是“盖了” _遮罩（masked）_的，防止将来要处理的后续位置信息对当下计算产生干扰。
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-27_transformer.png)
 
@@ -99,17 +99,19 @@ $$
 
 ### 后继
 
-紧跟着 vanilla Transformer，[Al-Rfou 等 (2018)](https://arxiv.org/abs/1808.04444) 加上了一系列辅助损失，从而能在字符层面训练深度 Transformer 语言模型，表现优于一众 LSTM 模型。模型主要用了几类辅助任务：
+紧跟着 vanilla Transformer，[Al-Rfou 等 (2018)](https://arxiv.org/abs/1808.04444) 加上了一系列辅助损失，从而能在字符层面训练深度 Transformer 语言模型，其表现优于一众 LSTM 模型。该模型主要添加了几类辅助任务：
 
-- 相较于只在序列尾端指生成一个预测，每个_即时位置_ 都要求做出正确预测，也就是给定更小的上下文环境强迫模型预估（比如上下文窗口开始处的第一对标识）
-- 每个 Transformer 中间层也被用于做预测。训练过程中层次越低参与权重越小，带来的总体损失也越小
-- 序列中的各位置能预测多个目标，即预测两个或多个未来标识
+- 相较于只在序列尾端指生成一个预测，每个_即时位置_ 也被要求做出恰当预测，给定更小的上下文环境强迫模型预估（比如上下文窗口开始处的第一对标识）
+- Transformer 的各个中间层也要进行预测。训练过程中层次越低参与权重越小，带来的总体损失也越小
+- 序列中的每个位置都能预测多个目标，也就是对两个或以上的后续标识进行预测
+
+下图展示了这几种辅助任务
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_transformer-aux-losses.png)
 
-# 自适应耗时（ACT）
+# 自适应耗时
 
-**自适应耗时（Adaptive Computation Time, ACT; [Graves, 2016](https://arxiv.org/abs/1603.08983)）**机制能动态决定循环神经网络需要多少计算时步。_曾在早先[文章](https://libertydream.github.io/2019/10/05/注意力和增强循环神经网络/#自适应计算耗时)中介绍过 ACT_
+**自适应耗时（Adaptive Computation Time, ACT; [Graves, 2016](https://arxiv.org/abs/1603.08983)）**机制能动态决定循环神经网络需要进行多少步计算。_个人曾在早先[文章](https://libertydream.github.io/2019/10/05/注意力和增强循环神经网络/#自适应计算耗时)中介绍过 ACT_
 
 比方说，现有 RNN 模型 $$\mathcal{R}$$ ，由输入权重 $$W_x$$，参数化的状态转移函数 $$\mathcal{S}(.)$$，一系列输出权重 $$W_y$$ 以及输出偏置 $$b_y$$ 组成。如果输入序列为 $$(x_1, \dots, x_L)$$，输出序列 $$(y_1, \dots, y_L)$$ 计算方式为：
 
@@ -119,7 +121,7 @@ s_t = \mathcal{S}(s_{t-1}, W_x x_t), \quad y_t = W_y s_t + b_y\quad\text{for }t=
 $$
 
 
-ACT 能让上述 RNN 结构对每个输入元素进行多步计算，具体数量是可变的、动态的。多步计算导致有一系列中间状态 $$(s_t^1, \dots, s_t^{N(t)})$$ 和结果 $$(y_t^1, \dots, y_t^{N(t)})$$ 产生——他们共享同样的状态转移函数 $$\mathcal{S}(.)$$，输出权重 $$W_y$$ 和偏置 $$b_y$$ ：
+ACT 能让上述 RNN 结构对每个输入元素进行多步计算，至于具体数量是可变、动态的。多步计算会生成一系列中间状态 $$(s_t^1, \dots, s_t^{N(t)})$$ 和中间结果 $$(y_t^1, \dots, y_t^{N(t)})$$ ——他们共享同样的状态转移函数 $$\mathcal{S}(.)$$，输出权重 $$W_y$$ 和偏置 $$b_y$$ ：
 
 
 $$
@@ -133,7 +135,7 @@ $$
 
 其中 $$\delta_{n,1}$$ 是二值信号量，表明是否加上了某步计算
 
-计算步骤数 $$N(t)$$ 由外部 s 型停止单元 $$h$$ 决定。单元计算要结合权重矩阵 $$W_h$$ 和偏置 $$b_h$$，对当前 $$n$$ 步的第 $$t$$ 个输入元素给出一个停止概率 $$p_t^n$$ ：
+计算步骤数 $$N(t)$$ 由外部 sigmoid 型停止单元 $$h$$ 决定。单元计算要结合权重矩阵 $$W_h$$ 和偏置 $$b_h$$，对当前 $$n$$ 步的第 $$t$$ 个输入元素给出一个停止概率 $$p_t^n$$ ：
 
 
 $$
@@ -155,7 +157,7 @@ R(t) = 1 - \sum_{n=1}^{N(t)-1} h_t^n & \text{if }n= N(t)\\
 $$
 
 
-其中 $$M$$ 是所允许的中间步骤数的上界，最终状态和输出结果是中间产物的加权和：
+其中 $$M$$ 是所允许的中间步骤数的上界，最终状态和输出结果是中间结果的加权和：
 
 
 $$
@@ -167,15 +169,15 @@ $$
 
 为了避免对各个输入进行不必要的过度思考，ACT 在损失函数里加上了 _思考损失（ponder cost）_$$\mathcal{P}(x) = \sum_{t=1}^L N(t) + R(t) $$ ，这样模型就会倾向于减少中间计算步骤的数量
 
-# 改善注意力跨度
+# 提升注意力跨度
 
-之所以要改变注意力跨度，目的是使自注意的上下文范围更广，更高效，更灵活。
+之所以要改善注意力跨度，目的是使自注意的上下文范围更广，用起来更高效，更灵活。
 
-## 更长跨度（Transformer-XL）
+## 更长跨度
 
 vanilla Transformer 的注意力跨度是固定且有限的。每次模型都是在处理相同片段中的其余元素，同时各个定长片段间的信息也不能交流。
 
-这种 _上下文片段_ 造成了一些问题：
+这种 _上下文片段_ 导致以下一些问题：
 
 - 模型学习不到间距特别长的词语间的依赖关系
 - 每段里的头几个标识因为上下文内容很少甚至没有，很难进行预测
@@ -184,7 +186,7 @@ vanilla Transformer 的注意力跨度是固定且有限的。每次模型都是
 **Transformer-XL** ([Dai 等, 2019](https://arxiv.org/abs/1901.02860); “XL” 意指“超长”) 通过两点改进解决了上下文片段问题：
 
 1. 复用片段间的隐态
-2. 为方便复用状态，采用新的位置编码方法
+2. 为方便状态复用，采用新的位置编码方法
 
 ### 隐态复用
 
@@ -214,7 +216,7 @@ $$
 
 为了使位置编码随片段移动而变化，Transformer-XL 选择对 _相对位置_ 进行编码，毕竟要做出好预测知道相对偏移量就够了，也就是键向量 $$\mathbf{k}_{\tau, j}$$ 和其查询向量 $$\mathbf{q}_{\tau, i}$$ 间的跨度 $$i -j$$。
 
-如果忽略掉除却位置编码外的比例系数  $$\frac {1}{\sqrt{d_k}}$$  和 softmax 中的归一化项，可以将 $$i$$ 处查询和 $$j$$ 处的键间的注意力得分记为：
+如果只看位置编码，忽略掉比例系数  $$\frac {1}{\sqrt{d_k}}$$  和 softmax 中的归一化项，可以将 $$i$$ 处查询和 $$j$$ 处键间的注意力得分记为：
 
 
 $$
@@ -240,7 +242,7 @@ $$
 
 - 用相对位置编码  $$\mathbf{r}_{i-j} \in \mathbf{R}^{d}$$ 替代 $$\mathbf{p}_j$$ 
 - 分别用两个要训练的参数 $$\mathbf{u}$$ （代表内容）和 $$\mathbf{v}$$ （代表位置）代替两项中的 $$\mathbf{p}_i\mathbf{W}^q$$ 
-- 键权重矩阵 $$\mathbf{W}^k$$ 拆为指代内容信息的 $$\mathbf{W}^k_E$$ 以及指代位置信息的 $$\mathbf{W}^k_R$$
+- 键权重矩阵 $$\mathbf{W}^k$$ 拆分为指代内容信息的 $$\mathbf{W}^k_E$$ 以及指代位置信息的 $$\mathbf{W}^k_R$$ 两部分
 
 ## 自适应跨度
 
@@ -286,7 +288,7 @@ $$
 
 上式中的 $$z$$ 是可微的，故将其与模型其他部分一同联合训练。每个注意力头的参数 $$z^{(i)}, i=1, \dots, h$$  独立训练，同时还要在损失函数中加上对 $$\sum_{i=1}^h z^{(i)}$$ 的 $$L_1$$ 惩罚。
 
-如果是采用[自适应耗时](#自适应耗时（ACT）)，该方法能进一步增强注意力跨度的灵活性，根据当前输入动态变化。注意力头在 $$t$$ 时刻的间距参数 $$z_t$$ 是一个 s 型函数，$$z_t = S \sigma(\mathbf{v} \cdot \mathbf{x}_t +b)$$，其中向量 $$\mathbf{v}$$ 和偏置 $$b$$ 与其他参数一起联合训练。
+如果是采用[自适应耗时](#自适应耗时)，该方法能进一步增强注意力跨度的灵活性，根据当前输入动态变化。注意力头在 $$t$$ 时刻的间距参数 $$z_t$$ 是一个 s 型函数，$$z_t = S \sigma(\mathbf{v} \cdot \mathbf{x}_t +b)$$，其中向量 $$\mathbf{v}$$ 和偏置 $$b$$ 与其他参数一起联合训练。
 
 经过对带有自适应注意力跨度的 Transformer 的系列实验， [Sukhbaatar 等 (2019)](https://arxiv.org/abs/1905.07799) 发现了一些通行趋势。较低层次并不需要很长的注意力跨度，而对高层的一些注意力头可能需要非常长的跨度。此外，自适应跨度能大幅减少 FLOPS（浮点运算次数/秒） 数量，对那些有着许多注意力层和大范围上下文的模型尤为明显。
 
@@ -336,7 +338,7 @@ $$
 
 注意 $$S_i$$ 的大小不固定，$$a(\mathbf{x}_i, S_i)$$ 大小恒定为 $$d_v$$ ，进而 $$\text{Attend}(\mathbf{X}, \mathcal{S}) \in \mathbb{R}^{L \times d_v}$$。
 
-反回归模型中，注意力跨度被定义为 $$S_i = \{j: j \leqslant i\}$$ ，即让每个标识同时关照此前所有位置。
+自回归模型中，注意力跨度被定义为 $$S_i = \{j: j \leqslant i\}$$ ，即让每个标识同时关照此前所有位置。
 
 而在因子分解自注意模型中，集合 $$S_i$$ 被拆分为依赖树，从而对每对 $$(i, j)，j \leqslant i$$ 而言都存在连通路径，且 $$i$$ 可以直接或间接的关照到 $$j$$ 。
 
@@ -383,3 +385,136 @@ $$
 3. 使用多头注意力机制，但与 vanilla Transformer 不同的是，每个头可能会采用上述模式之一，1 或 2 => 这么选通常效果最好
 
 Sparse Transformer 还提出了一系列变革从而能训练上百层 Transformer，包括梯度检查点，反向传播时重计算注意力与 FF 层，混合精度训练，高效稀疏块的实现等等。更多相关内容请看[论文](https://arxiv.org/abs/1904.10509)
+
+## 局部感知哈希
+
+**Reformer** 模型（[Kitaev 等 2020](https://arxiv.org/abs/2001.04451)）针对下列 Transformer 痛点进行改进：
+
+- $$N$$ 层模型所需记忆空间比单层模型大 $$N$$ 倍，因为要存储的反向传播激活值数量与层数正相关
+- 中间的 FF 层经常很大
+- 长为 $$L$$ 的序列所对应的注意力矩阵往往需要 $$O(L^2)$$ 的记忆和时间开销
+
+Reformer 主要有两点改进：
+
+1. 将点积注意力替换为 _局部感知哈希注意力（locality-sensitive hashing，LSH）_将复杂度从 $$O(L^2)$$ 降为 $$O(L\log L)$$.
+2. 将标准残差块替换为 _可逆残差层（reversible residual layers）_，这样不再需要存储 $$N$$ 次激活值（即与层数正比），训练时存一次即可
+
+### 局部感知哈希注意力
+
+[注意力公式](#注意力与自注意)里的 $$\mathbf{Q} \mathbf{K}^\top$$ 部分中，我们实际关心的只有那个最大值，因为最大元素 softmax 之后贡献也最多。对每个查询 $$\mathbf{q}_i \in \mathbf{Q}$$，要找到距离 $$\mathbf{q}_i$$ 最近的行向量 $$\mathbf{K}$$，而为了在高维空间尽快的找到最近邻，Reformer 将[局部感知哈希](https://en.wikipedia.org/wiki/Locality-sensitive_hashing)引入了注意力机制。
+
+如果映射会保存数据点间的距离信息，那我们就说哈希映射 $$x \mapsto h(x)$$ 是 _局部感知_ 的，这样相近的向量哈希值相似，而相距较远的向量哈希值则差异较大。Reformer 采用的就是这样一种方案，给定固定随机矩阵 $$\mathbf{R} \in \mathbb{R}^{d \times b/2}$$（$$b$$ 是超参数），哈希函数为 $$h(x) = \arg\max([xR; −xR])$$。下图展示了局部感知注意力
+
+![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_LSH-attention-matrix.png)
+
+在 LSH 中，查询向量只需关照同一哈希桶中的位置，$$S_i = \{j: h(\mathbf{q}_i) = h(\mathbf{k}_j)\}$$。如图所示，其执行流程如下：
+
+- (a) 全关照注意力矩阵通常是稀疏的
+- (b) 借助 LSH，可以对键与查询排序，根据各自哈希分桶对齐
+- (c) 令 $$\mathbf{Q} = \mathbf{K}$$（确切的说是 $$\mathbf{k}_j = \mathbf{q}_j / \|\mathbf{q}_j\|$$），这样每个桶里就有等量的键和查询向量了。有意思的地方在于，这种 “共享 QK” 的配置并没有影响到 Transformer 的表现
+- (d)  进行批处理，连续的 $$m$$ 块查询被组织在了一起。
+
+![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_LSH-attention.png)
+
+### 可逆残差网络
+
+Reformer 另一大改进就是 _可逆残差层（[Gomez 等 2017](https://arxiv.org/abs/1707.04585)）_ 的使用了。可逆残差网络的创作动机在于设计一种框架，能以某种方式使任意层的激活值能从后续层的激活值中恢复出来，仅使用模型参数。这样就能在反向传播的时候从新计算出激活值而不用将其全部存起来，从而降低记忆开销。
+
+对于任一层 $$x \mapsto y$$，一般残差层是 $$y = x + F(x)$$，而可逆层的做法是把输入和输出分成结对形式 $$(x_1, x_2) \mapsto (y_1, y_2)$$ ，并按下列方式计算：
+
+
+$$
+y_1 = x_1 + F(x_2),\; y_2 = x_2 + G(y_1)
+$$
+
+
+取反很简单：
+
+
+$$
+x_2 = y_2 - G(y_1), \; x_1 = y_1 − F(x_2)
+$$
+
+
+Reformer 借鉴了这一思想，在一个可逆网络块中将注意力（$$F$$）和前馈层（$$G$$）结合了起来：
+
+
+$$
+Y_1 = X_1 + \text{Attention}(X_2), \; Y_2 = X_2 + \text{FeedForward}(Y_1)
+$$
+
+
+如果将前馈计算分块进行，记忆开销可以进一步减少：
+
+
+$$
+Y_2 = [Y_2^{(1)}; \dots; Y_2^{(c)}] = [X_2^{(1)} + \text{FeedForward}(Y_1^{(1)}); \dots; X_2^{(c)} + \text{FeedForward}(Y_1^{(c)})]
+$$
+
+
+最终可逆 Transformer 不需要存任意层的激活值。
+
+# 循环起来
+
+**通用 Transformer（Universal Transformer，[Dehghani 等. 2019](https://arxiv.org/abs/1807.03819)）**将 Transfomer 的自注意和 RNN 的循环机制结合了起来，期望既能享受到 Transformer 的长文全局感知的好处，又能学到 RNN 的归纳偏差。
+
+相较于固定层数，通用 Transformer 采用自适应耗时动态调整步骤数量。如果固定了步数，通用 Transformer 等价于层间参数共享的多层 Transformer。
+
+站高一层看，通用 Transformer 可以被视为一种循环函数，对每个标识学习相应隐态表示。循环函数在标识间并行演化，同时经由自注意力来共享不同位置间的信息。下图展示了通用 Transformer 怎样不断并行提炼各处的一系列隐态表示。
+
+![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_universal-transformer-loop.png)
+
+假定输入序列长为 $$L$$，通用 Transformer 迭代更新 $$t$$ 步表示 $$\mathbf{H}^t \in \mathbb{R}^{L \times d}$$，步数可变。开始的第 0 步，  $$\mathbf{H}^0$$ 和输入嵌入矩阵相同。多头自注意机制下所有位置并行计算，然后经循环转换函数处理。
+
+
+$$
+\begin{aligned}
+\mathbf{A}^t &= \text{LayerNorm}(\mathbf{H}^{t-1} + \text{MultiHeadAttention}(\mathbf{H}^{t-1} + \mathbf{P}^t) \\
+\mathbf{H}^t &= \text{LayerNorm}(\mathbf{A}^{t-1} + \text{Transition}(\mathbf{A}^t))
+\end{aligned}
+$$
+
+
+其中转换函数 $$\text{Transition}(.)$$ 可以是[可分离卷积](https://arxiv.org/abs/1610.02357)，亦或是由两个位置层面（也就是单独处理每一行 $$\mathbf{A}^t$$）的仿射变换 + 一层 ReLU 构成的的全连接神经网络
+
+位置编码 $$\mathbf{P}^t$$ 使用正弦位置信号，只是额外加上了时间维度：
+
+
+$$
+\text{PE}(i, t, \delta) = 
+\begin{cases}
+\sin(\frac{i}{10000^{2\delta'/d}}) \oplus \sin(\frac{t}{10000^{2\delta'/d}}) & \text{if } \delta = 2\delta'\\
+\cos(\frac{i}{10000^{2\delta'/d}}) \oplus \cos(\frac{t}{10000^{2\delta'/d}}) & \text{if } \delta = 2\delta' + 1\\
+\end{cases}
+$$
+
+
+![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_universal-transformer.png)
+
+上图简单展示了通用 Transformer，编码器和解码器的基础循环结构相同，解码器还多了对解码器最终表示 $$\mathbf{H}^T$$的处理。
+
+对于自适应版的通用 Transformer，循环步数 $$T$$ 由 [ACT](#自适应耗时) 动态决定。每个位置都有动态 ACT 停止机制，一旦某个单标识循环块停止，它会终止进一步的循环更新，只是简单拷贝当前值到下一步直到所有块都停止，或者模型达到最大步数限制。
+
+# RL 的稳定化
+
+自注意机制避免了用固定大小的隐态表示全部过往信息，而且不会像 RNNs 那样遭遇梯度消融或爆炸问题。强化学习任务无疑可以从这些特性中获益，但是即使是监督学习下训练 Transformer 都很难，更别提 RL 情景了。毕竟自己训练一个 LSTM 代理并保持稳定是很有挑战的。
+
+**Gated Transformer-XL** (**GTrXL**; [Parisotto 等 2019](https://arxiv.org/abs/1910.06764)) 是 RL 应用 Transformer 的一个尝试。GTrXL 在 [Transformer-XL](#更长跨度) 上进行了两点改进成功做到了训练稳定：
+
+1. 层归一化只用在残差模块的输入流上，捷径流上不用。这样重新安排的关键好处在于可以让原始输入从头传到尾
+2. 残差连接替换为 GRU 风格（门控循环单元，Gated Recurrent Unit; [Chung et al., 2014](https://arxiv.org/abs/1412.3555)）的 _门机制_ 。
+
+$$
+\begin{aligned}
+r &= \sigma(W_r^{(l)} y + U_r^{(l)} x) \\
+z &= \sigma(W_z^{(l)} y + U_z^{(l)} x - b_g^{(l)}) \\
+\hat{h} &= \tanh(W_g^{(l)} y + U_g^{(l)} (r \odot x)) \\
+g^{(l)}(x, y) &= (1-z)\odot x + z\odot \hat{h}
+\end{aligned}
+$$
+
+门控函数参数显式初始化为近似单位阵映射的形式——这也是为什么有 $$b_g$$ 项。有 $$b_g > 0$$ 的话对学习加速大有裨益
+
+![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_gated-transformer-XL.png)
+
+上图对 Transformer-XL, 层归一 Transformer-XL 和门控 Transformer-XL 进行了对比。
