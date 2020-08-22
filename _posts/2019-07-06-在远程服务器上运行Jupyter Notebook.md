@@ -26,7 +26,7 @@ excerpt:    Jupyter Notebook 是很多算法工程师研究 DL，做尝试的首
 
 这里我会向你展示如何在远程服务器上跑 Jupyter Notebook 并在你的笔记本上访问它。我还会向你展示如何通过两条`bash`命令使整个过程更加流畅。
 
-## 启用远程 Notebook 服务器
+### 启用远程 Notebook 服务器
 
 使用SSH（Secure Shell Protocol）在远程服务器上启动 Jupyter Notebook 服务。基本语法如下：
 
@@ -52,7 +52,7 @@ nohup ssh -f username:password@remote_server_ip "cd project_floder; .virtual_env
 
 注意我使用分号`;`而不是换行将三个命令写在了一行命令中。执行这条命令会在8889端口启动 Jupyter Notebook 服务，并使其在后台运行。最后，我使用了参数`-f`后台执行`ssh`，同时添加了`nohup`命令屏蔽了这期间的所有输出来保证你能正常继续使用终端(terminal)。通过[这里](https://www.computerhope.com/unix/unohup.htm)了解`nohup`命令。
 
-## 访问你的 Notebook
+### 访问你的 Notebook
 
 通过下方给出的url形式来访问notebook：
 
@@ -76,17 +76,17 @@ local_server:local_port:remote_server:remote_port
 
 通过上述步骤，你现在可以在你的本地浏览器上的`localhost:8889`访问远程 Jupyter Notebook 服务上的内容了。
 
-## 停止远程 Notebook 服务
+### 停止远程 Notebook 服务
 
 原则上讲，你可以让notebook服务在远程服务器上一直运行下去（除去重启和崩溃的情况），但你可能需要停下服务来更新`jupyter`。如果你有这样的需求，有两个方法：通过浏览器或者命令行
 
-### 通过浏览器
+#### 通过浏览器
 
 如果你使用的 Jupyter Notebook 版本比较新，你可以在浏览器窗口右上角找到一个`Quit`按钮。如果你点击了退出，你必须通过前文所说的启动命令重启服务。
 
 ![]( https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-07-07-quit-button.png)
 
-### 通过命令行
+#### 通过命令行
 
 如果你的 Jupyter 版本还没有退出按钮，或者你就是更喜欢通过终端工作，你可以通过命令行停止服务。Jupyter 有一个`stop`命令来停止notebook：
 
@@ -108,7 +108,7 @@ ssh username:passowrd@remote_server_ip "pkill -u username jupyter"
 
 `-u username`指定了只有`username`启动的`jupyter`进程才要被停掉。这条语句可以在你同时运行多个 notebook 的时候一次性中断这些进程。当然，你也可以选择到服务器上手动启动、管理 notebook 服务并保证终端一直开启，此时你可以通过`CTRL + C`键盘指令结束 notebook 服务。
 
-## 让操作更加流畅
+### 让操作更加流畅
 
 如果要记住所有这些命令会很麻烦，幸运的是你可以为每一个命令创建一个bash别名来简化操作。将下列语句添加到`~/.bashrc`文件下：
 

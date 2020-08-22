@@ -27,9 +27,9 @@ Jupyter Notebooks 是机器学习和数据科学领域特别钟爱的 Python 编
 9. 代码片段菜单，在线添加列表推导式等常用的 Python 结构
 10. 一个漂亮舒适的深蓝配色方案
 
-## 开始行动
+### 开始行动
 
-### 深蓝午夜主题
+#### 深蓝午夜主题
 
 Jupyter Notebooks 原生白色背景下工作久了眼睛会很难受。使用下列命令安装黑色主题
 
@@ -52,7 +52,7 @@ pip install --upgrade jupyterthemes
 jt -t onedork -fs 95 -altp -tfs 11 -nfs 115 -cellw 88% -T
 ```
 
-### 环境热切换
+#### 环境热切换
 
 将 Anaconda 内创建的自定义环境作为内核添加到 Jupyter Notebooks。这样切换环境时只需简单的选内核即可。切换内核不用重启 notebook。
 
@@ -79,7 +79,7 @@ python -m ipykernel install --user --name=gym
 
 ![]( https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-08-17_add_env_to_jupyter.png)
 
-### 其他特性
+#### 其他特性
 
 要获得其他特性，需要首先安装 _[nbextensions for Jupyter Notebooks](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html)_，执行下列命令：
 
@@ -116,7 +116,7 @@ jupyter contrib nbextension install --system
 
 上面只是我常用的一些扩展，你可以自行尝试探索更多。一些扩展也很有趣，比如*ScrollDown*， *table_beautifier*， 和 *Hinterland*
 
-### 后记
+#### 后记
 
 1. 如果没有安装 Anaconda，请忽略所有带有 conda 的命令。当然还有环境热切换的部分
 2. 如果遇到大部分扩展显示 *possibly incompatible*，去掉上方*disable configuration for nbextensions without explicit compatibility* 的对勾

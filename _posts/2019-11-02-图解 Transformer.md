@@ -20,7 +20,7 @@ excerpt:    图形化展示编码-解码（encoder-decoder）架构，逐步拆�
 
 Transformer 模型出自论文[Attention is All You Need](https://arxiv.org/abs/1706.03762) ，**借助注意力机制实现并行训练加速**。特定任务上的表现优于谷歌的神经机翻译模型（the Google Neural Machine Translation model）。
 
-# 顶层视角
+### 顶层视角
 
 不妨先将模型视作黑箱，机器翻译场景下，其作用是将一种语言的文本翻译成另一种语言
 
@@ -46,7 +46,7 @@ Transformer 模型出自论文[Attention is All You Need](https://arxiv.org/abs/
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-11-02_Transformer_decoder.png)
 
-# 带入张量再来看
+### 带入张量再来看
 
 我们已经看到了模型的大体情况，接下来看一下不同的向量（张量）是怎样在二者间流动从输入变输出的。
 
@@ -64,7 +64,7 @@ Transformer 模型出自论文[Attention is All You Need](https://arxiv.org/abs/
 
 接下来我们用一个短句作为例子，看看编码器中各个部分到底发生了什么
 
-# 编码解密
+### 编码解密
 
 如上文所述，编码器接收向量列表作为输入，通过自关注层的处理传入前馈神经网络，再传递给上级编码器。
 
@@ -72,7 +72,7 @@ Transformer 模型出自论文[Attention is All You Need](https://arxiv.org/abs/
 
 不要被自关注、self-attention 这样的词唬住，好像谁都很熟一样。看看它做了什么吧。
 
-## 顶层视角下的自关注
+#### 顶层视角下的自关注
 
 假定我们要翻译的语句是 ”The animal didn't cross the street because it was too tired"。那么这里的 “ it”是指代什么呢？街道还是动物？对人来说这太简单了，但对机器来讲不是。
 
@@ -84,7 +84,7 @@ Transformer 模型出自论文[Attention is All You Need](https://arxiv.org/abs/
 
 图中所示的是第五个编码器（顶层编码器）处理“it”时的场景，注意力聚焦于“The Animal”上并将其部分表示带入了“it”编码内容当中。你可以看看  [Tensor2Tensor notebook](https://colab.research.google.com/github/tensorflow/tensor2tensor/blob/master/tensor2tensor/notebooks/hello_t2t.ipynb) ，交互式运行体验一下。
 
-## 自关注的细节
+#### 自关注的细节
 
 先来看一下如何使用向量计算自关注量，然后再分析实际中如何通过矩阵运算实现该效果。
 
@@ -118,7 +118,7 @@ softmax 得分决定了每个词对该位置的参照度。显然该位置的单
 
 这样就完成了自关注运算，可以将运算结果送入前馈神经网络中去。但实际操作上会使用矩阵计算进行加速。
 
-## 自关注的矩阵运算
+#### 自关注的矩阵运算
 
 **第一步**要计算查询、键和值三个矩阵。将嵌入向量组成一个矩阵 $$X$$，然后与我们训练好的权重矩阵相乘（$$W^Q,W^K,W^V$$）
 
@@ -130,7 +130,7 @@ $$X$$ 矩阵中的每一行对应输入序列中的一个词。这里再一次�
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-11-02_self-attention-matrix-calculation-2.png)
 
-## 多端并发
+#### 多端并发
 
 论文中通过引入多端注意力（multi-headed attention）机制进一步优化自关注层。其有两种方式提高注意力层的表现：
 
@@ -163,7 +163,7 @@ $$X$$ 矩阵中的每一行对应输入序列中的一个词。这里再一次�
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-11-02_transformer_self-attention_visualization_3.png)
 
-## 使用位置编码表示序列顺序
+#### 使用位置编码表示序列顺序
 
 目前为止我们讲到的模型只关注了各位置上的内容，忽视了位置间的顺序。为了补上这一点，Transformer 给每个输入的嵌入向量加上了一个额外向量。
 
@@ -183,7 +183,7 @@ $$X$$ 矩阵中的每一行对应输入序列中的一个词。这里再一次�
 
 具体计算公式参加论文 3.5 节，生成位置编码的代码参见 [`get_timing_signal_1d()`](https://github.com/tensorflow/tensor2tensor/blob/23bd23b9830059fbc349381b70d9429b5c40a139/tensor2tensor/layers/common_attention.py) 。这当然不是唯一位置编码方法，但其一大优点是可以缩放到任意序列长度（比如要我们的模型翻译一个比任何现存语料中的句子都长的序列）。
 
-## 残差
+#### 残差
 
 进一步之前还有一点小细节要说明，编码器中各子层（自关注，前馈网络）都会有一个残差连接过程，并接一步层归一化操作（ [layer-normalization](https://arxiv.org/abs/1607.06450) ，有助于缩短训练耗时）。
 
@@ -197,7 +197,7 @@ $$X$$ 矩阵中的每一行对应输入序列中的一个词。这里再一次�
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-11-02_transformer_resideual_layer_norm_3.png)
 
-# 解码器解密
+### 解码器解密
 
 既然编码器端已经涵盖了绝大部分概念，基本上解码器怎么工作也就清楚了。但一起来看一下他们是怎么一同工作的。
 
@@ -215,7 +215,7 @@ $$X$$ 矩阵中的每一行对应输入序列中的一个词。这里再一次�
 
 “Encoder-Decoder Attention” 层工作机理很像多端自注意力，只是它的查询矩阵是根据下层传来内容计算所得，键值矩阵是编码器组传来的。
 
-# 最后的线性层与 softmax 层
+### 最后的线性层与 softmax 层
 
 解码器组会输出浮点值构成的向量，那又该怎么将其转换成单词呢？这就是最后的线性层及其后面的 Softmax 层的工作了。
 
@@ -227,7 +227,7 @@ softmax 层将得分转换为概率（全为正，总和为1）。选择最高�
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2019-11-02_transformer_decoder_output_softmax.png)
 
-# 回顾
+### 回顾
 
 目前我们已经走完了训练 Transformer 的整个前向传播过程，迅速瞥一眼模型训练的直观想法。
 
@@ -241,7 +241,7 @@ softmax 层将得分转换为概率（全为正，总和为1）。选择最高�
 
 到这我们来讨论一下模型损失函数。这是训练阶段优化模型的依据，以其获得良好泛化能力的模型
 
-# 损失函数
+### 损失函数
 
 假设我们正在训练模型，当前是第一步，将"merci"翻译成"thanks"。也就是说希望结果的概率分布指向“thanks”，可模型还没训练所以当下没戏。
 

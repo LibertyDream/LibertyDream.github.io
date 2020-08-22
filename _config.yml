@@ -99,8 +99,8 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "开源中国",
-        href: "https://www.oschina.net/"
+        title: "Google Analytics",
+        href: "https://analytics.google.com/analytics"
     },{
         title: "Kaggle",
         href: "https://www.kaggle.com/"
