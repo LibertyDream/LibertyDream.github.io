@@ -28,7 +28,7 @@ excerpt:    注意力无疑是近几年深度学习社区中十分流行的理�
 
 简而言之，深度学习中的注意力可以广义地理解一个衡量重要程度的向量：为了预测或推理某个元素，比如某个图像中的像素点或是一句话中的某个词，使用注意力向量来估算其与其他元素间的关联（可能在其他论文里叫“关照”）强度，并将元素值基于注意力向量加权求和作为目标取值的近似估计。
 
-# Seq2Seq 模型的问题
+### Seq2Seq 模型的问题
 
 序列到序列（**seq2seq**） 模型源自语言建模领域（[Sutskever, et al. 2014](https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf)）。宽泛地讲，其目的在于将输入序列（源序列）转换为一个新序列（目标序列），两序列长度不定。转换任务的例子包括多语言间的机器翻译（文本/音频），问答对话的生成，甚至是将句子解析成语法树。
 
@@ -43,7 +43,7 @@ seq2seq 模型通常采取编码器-解码器（encoder-decoder）结构，主�
 
 这种定长环境向量的设计存在明显而致命的缺陷——无法记忆长序列。处理完整个输入序列之后早已忘了最开始的部分，注意力机制（[Bahdanau et al., 2015](https://arxiv.org/pdf/1409.0473.pdf)）就是针对该问题提出的。
 
-# 为翻译而生
+### 为翻译而生
 
 注意力机制开始是为了在神经机翻译（[NMT](https://arxiv.org/pdf/1409.0473.pdf)）任务中帮助记忆长源序列而设计的。相较于根据编码器最后的隐态构建一个单独的环境向量，注意力的诀窍是在环境向量和整个源输入序列间修了条秘道。这些捷径的权重对各个输出元素来讲都是可以定制的。
 
@@ -57,7 +57,7 @@ seq2seq 模型通常采取编码器-解码器（encoder-decoder）结构，主�
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-24_encoder-decoder-attention.png)
 
-## 定义
+#### 定义
 
 现在来试着科学地给 NMT 中提出的注意力机制下个定义。假定我们现在有长度为 $$n$$ 的源序列 $$\mathbf{x}$$，试着输出长度为 $$m$$ 的目标序列 $$\mathbf{y}$$：
 
@@ -103,11 +103,11 @@ $$
 
 更多实现上的指导可以看 Tensorflow 团队这篇很棒的[教程](https://www.tensorflow.org/versions/master/tutorials/seq2seq)
 
-# 注意力家族
+### 注意力家族
 
 在注意力的帮助下，源序列和目标序列间的依赖不再受距离约束了！受到注意力大幅改善机器翻译表现的鼓舞，很快这项技术就被推广到了计算机视觉领域（[Xu 等 2015](http://proceedings.mlr.press/v37/xuc15.pdf)），同时人们开始探索各种其他样式的注意力机制（[Luong 等, 2015](https://arxiv.org/pdf/1508.04025.pdf)； [Britz 等, 2017](https://arxiv.org/abs/1703.03906); [Vaswani 等, 2017](http://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf)）
 
-## 汇总
+#### 汇总
 
 下面是一些时下流行的注意力机制及相应一致性评分函数的汇总表
 
@@ -134,7 +134,7 @@ $$
 
 （&）在 Cheng 2016 和一些其他论文中又被称为“内在注意力”
 
-## 自注意力
+#### 自注意力
 
 **自注意力（self-attention）**又叫做**内在注意力（intra-attention）**，是一种将单一序列的不同部分关联起来的注意力机制，一般是为了计算相同序列的表征。在机器阅读，摘要总结或是图像描述生成等任务中十分有效。
 
@@ -142,7 +142,7 @@ $$
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-24_self-attention-example.png)
 
-## 软注意力 vs 硬注意力
+#### 软注意力 vs 硬注意力
 
 在 [show, attend and tell](http://proceedings.mlr.press/v37/xuc15.pdf) 一文中，注意力机制用来给图片生成标题。图像先经过 CNN 编码抽取特征，然后使用 LSTM 解码器解析卷积特征来逐个生成描述词，权重通过注意力学到。注意力权重的可视化清晰地展示了模型当前正“看着”哪个区域来输出准确的描述词。
 
@@ -157,13 +157,13 @@ $$
   - 优点：推理时间更少
   - 缺点：模型不可微，需要像方差缩减或强化学习等更复杂的技术来进行训练
 
-## 全局注意力 vs 局部注意力
+#### 全局注意力 vs 局部注意力
 
 [Luong 等, 2015](https://arxiv.org/pdf/1508.04025.pdf) 提出“全局”和“局部”注意力。全局注意力和软注意力类似，而局部注意力则是软硬混合体，改进硬注意力使其可微：模型首先针对当前目标词预测一个对齐位置，并以源词为中心框定窗口计算环境向量。
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-24_global-local-attention.png)
 
-# 神经图灵机
+### 神经图灵机
 
 图灵在 [1936](https://en.wikipedia.org/wiki/Turing_machine) 年提出了一种简洁计算模型，由一根无限长的纸带和运算头组成，纸带上有无数单元格，每个单元格以 0，1 或空格（“ ”）进行填充，运算头可以识别、编辑单元格内的标识，能向左或向右移动纸带。理论上图灵机可以模拟任意计算机算法，无论其多么复杂或计算代价多么高昂。无限的记忆容量使图灵机没有什么计算限制，但现实中的计算机显然做不到这点，所以我们也只是将图灵机当作一种数学计算模型
 
@@ -177,7 +177,7 @@ NTM 由两部分构成，一个充当 _控制器（controller）_ 的神经网�
 
 <img src="https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-27_NTM.png" style="zoom:33%;" />
 
-### 读写
+#### 读写
 
 在 $$t$$ 时刻从记忆库中读取内容时，大小为 $$N$$ 的注意力向量 $$\mathbf{w}_t$$ 控制着记忆库各位置（矩阵的行）所应分配的注意力多少。读向量 $$\mathbf{r}_t$$ 是以注意力为权重的加权和：
 
@@ -200,7 +200,7 @@ $$
 $$
 
 
-### 注意力机制
+#### 注意力机制
 
 神经图灵机中怎样生成注意力分布 $$\mathbf{w}_t$$ 取决于寻址机制：NTM 采用的是基于内容和基于位置的混合寻址方式
 
@@ -245,7 +245,7 @@ $$
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-25_NTM-flow-addressing.png)
 
-# 指针网络
+### 指针网络
 
 在分拣或旅行推销的场景下，无论是输入还是输出都是序列化数据。不幸的是，这类问题不能简单的靠传统序列到序列或 NMT 模型加以解决，毕竟输出的细分类别事先并不知道，而是完全由输入规格决定。对此专门提出了**指针网络**（**Pointer Net ，Ptr-Net **,[Vinyals 等 2015](https://arxiv.org/abs/1506.03134)）：输出元素与输入序列中的_位置_ 相对应，相较于使用注意力对编码器隐层单元和环境向量进行混合，指针网络对所有输入元素分配注意力以从中挑选一个作为解码环节的输出
 
@@ -264,11 +264,11 @@ $$
 
 这里的注意力机制是简化过的，因为指针网络并没有基于注意力权重将编码器状态融入输出当中，这样输出就仅对应于输入位置而非输入内容。
 
-# Transformer
+### Transformer
 
 ["Attention is All you Need"](http://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf) 无疑是 2017 年最具影响力的有趣论文之一，文章对软注意力进行了大幅改进使得 seq2seq 模型可以不再依赖于循环网络单元。其中提出的 **transformer** 模型完全基于自注意机制，无需使用序列对齐的循环结构。其中所有的奥秘都存在它的模型框架中。
 
-## 键，值和查询
+#### 键，值和查询
 
 transformer 主要由_多头（端）自注意力机制（ multi-head self-attention mechanism）_ 单元构成。transformer 将输入的编码表示视作一组**键值对$$(\mathbf{K}, \mathbf{V})$$**，二者都是 $$n$$ 维（输入序列长度）的。在 NMT 场景中，键与值是编码器隐态，而在解码器部分，上一个输出会被压缩为一个 $$m$$ 维的**查询向量（query，Q）**，下一个输出通过将该向量与键值对组做映射得到。
 
@@ -280,7 +280,7 @@ $$
 $$
 
 
-## 多头自注意力
+#### 多头自注意力
 
 <img src="https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-27_multi-head-attention.png" style="zoom:50%;" />
 
@@ -299,7 +299,7 @@ $$
 
  $$\mathbf{W}^Q_i$$, $$\mathbf{W}^K_i$$, $$\mathbf{W}^V_i$$, 和 $$\mathbf{W}^O$$ 是要学习的参数矩阵。
 
-## 编码器
+#### 编码器
 
 <img src="https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-27_transformer-encoder.png" style="zoom: 33%;" />
 
@@ -309,7 +309,7 @@ $$
 - 每一层都有一个**多头注意力层**和一个简单的位置层面的**全连接前馈网络**
 - 每个子层都使用[残差](https://arxiv.org/pdf/1512.03385.pdf)连接，并跟着一个**归一化**层。所有子层输出数据都是相同的维度 $$d_\text{model} = 512$$
 
-## 解码器
+#### 解码器
 
 <img src="https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-27_transformer-decoder.png" style="zoom: 33%;" />
 
@@ -321,7 +321,7 @@ $$
 - 类似于编码器，每个子层使用残差连接并接着归一化
 - 对第一个多头注意力子层稍作调整防止关照到后续位置，因为我们不想在预测当前位置内容的时候看到未来的目标序列
 
-## 完整框架
+#### 完整框架
 
 至此，transformer 框架的整体视角就有了：
 
@@ -331,7 +331,7 @@ $$
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-27_transformer.png)
 
-# SNAIL
+### SNAIL
 
 transformer 没有循环或卷积结构，即便是给嵌入向量加上了位置编码，序列顺序信息的表示还是很弱。对于位置依赖敏感的问题，比如[强化学习](https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html)，这会造成大麻烦。
 
@@ -341,7 +341,7 @@ transformer 没有循环或卷积结构，即便是给嵌入向量加上了位�
 
 SNAIL 源自元学习领域，这是值得单独写篇文章介绍的话题了。简而言之，元学习是希望模型对有着相似分布的新的未知任务有较强的泛化能力。感兴趣可以看看这篇[介绍](http://bair.berkeley.edu/blog/2017/07/18/learning-to-learn/)
 
-# 自注意 GAN
+### 自注意 GAN
 
 _自注意 GAN_(**SAGAN**; [Zhang 等, 2018](https://arxiv.org/pdf/1805.08318.pdf)) 将自注意层引入 [GAN](https://libertydream.github.io/2020/04/19/一文了解对抗生成网络/) 中使生成器和判别器能更好的对空间区域间的关系进行建模。
 
