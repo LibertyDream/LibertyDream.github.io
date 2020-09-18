@@ -15,6 +15,21 @@ excerpt:
 
 ### 符号说明
 
+| Symbol                                    | Mean                                                         |
+| ----------------------------------------- | ------------------------------------------------------------ |
+| $$\mathcal{D}$$                           | The dataset, $$\mathcal{D} = \{ \mathbf{x}^{(1)}, \mathbf{x}^{(2)}, \dots, \mathbf{x}^{(n)} \}$$, contains $$n$$ data samples; $$\vert\mathcal{D}\vert =n $$. |
+| $$\mathbf{x}^{(i)}$$                      | Each data point is a vector of $$d$$ dimensions, $$\mathbf{x}^{(i)} = [x^{(i)}_1, x^{(i)}_2, \dots, x^{(i)}_d]$$. |
+| $$\mathbf{x}$$                            | One data sample from the dataset, $$\mathbf{x} \in \mathcal{D}$$. |
+| $$\mathbf{x}’$$                           | The reconstructed version of $$\mathbf{x}$$.                 |
+| $$\tilde{\mathbf{x}}$$                    | The corrupted version of $$\mathbf{x}$$.                     |
+| $$\mathbf{z}$$                            | The compressed code learned in the bottleneck layer.         |
+| $$a_j^{(l)}$$                             | The activation function for the $$j$$-th neuron in the $$l$$-th hidden layer. |
+| $$g_{\phi}(.)$$                           | The **encoding** function parameterized by $$\phi$$.         |
+| $$f_{\theta}(.)$$                         | The **decoding** function parameterized by $$\theta$$.       |
+| $$q_{\phi}(\mathbf{z}\vert\mathbf{x})$$   | Estimated posterior probability function, also known as **probabilistic encoder**. |
+| $$p_{\theta}(\mathbf{x}\vert\mathbf{z})$$ | Likelihood of generating true data sample given the latent code, also known as **probabilistic decoder**. |
+| ----------                                | ----------                                                   |
+
 ### 自编码器
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-autoencoder-architecture.png)
