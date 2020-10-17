@@ -293,27 +293,41 @@ $$
 
 ### Beta-VAE
 
-如果隐向量 $$\mathbf{z}$$ 中的每个变量只对单一生成要素敏感，而又对其他要素相对稳定，我们说这个表示是解耦了的或是因子分解了的。解耦表示的一个常见好处是*良好的可解释性*，并易于泛化到各类任务上。
+如果隐向量 $$\mathbf{z}$$ 中的每个变量只对单一生成要素敏感，而又对其他要素相对保持稳定，就说这个表示是解耦了的或是因子分解了的。解耦表示的一大好处是*良好的可解释性*，并易于泛化到各类任务上。
 
-β-VAE $$\delta$$):
+比如，基于人脸照片训练的模型可以捕捉到性别、肤色、发色、发长和情绪等属性，无论是否带了眼镜以及各维度上许多其他相对独立的要素存在与否。这种解耦表示对面部图像生成来讲大有用处。
+
+β-VAE([Higgins et al., 2017](https://openreview.net/forum?id=Sy2fzU9gl)) 是变分自编码器的一个变种，格外强调对解耦态隐式要素的发掘。照 VAE 的思路，要在使生成真实数据的概率最大化的同时，令实际分布与预估后验分布的差距足够小（比一个够小的常数 $$\delta$$ 小）：
+
+
 $$
 \begin{aligned}
 &\max_{\phi, \theta} \mathbb{E}_{\mathbf{x}\sim\mathcal{D}}[\mathbb{E}_{\mathbf{z} \sim q_\phi(\mathbf{z}\vert\mathbf{x})} \log p_\theta(\mathbf{x}\vert\mathbf{z})]\\
-&\text{subject to } D_\text{KL}(q_\phi(\mathbf{z}\vert\mathbf{x})\|p_\theta(\mathbf{z})) < \delta
+&\text{要求 } D_\text{KL}(q_\phi(\mathbf{z}\vert\mathbf{x})\|p_\theta(\mathbf{z})) < \delta
 \end{aligned}
 $$
-r $$\beta$$  $$\mathcal{F}(\theta, \phi, \beta)$$:
+
+
+可以按 [KKT 条件](https://www.cs.cmu.edu/~ggordon/10725-F12/slides/16-kkt.pdf)用拉格朗日乘子 $$\beta$$ 重写表达式。上述最优化问题只有一个不等式约束，其等价于最大化下列方程 $$\mathcal{F}(\theta, \phi, \beta)$$：
+
+
 $$
 \begin{aligned}
 \mathcal{F}(\theta, \phi, \beta) &= \mathbb{E}_{\mathbf{z} \sim q_\phi(\mathbf{z}\vert\mathbf{x})} \log p_\theta(\mathbf{x}\vert\mathbf{z}) - \beta(D_\text{KL}(q_\phi(\mathbf{z}\vert\mathbf{x})\|p_\theta(\mathbf{z})) - \delta) & \\
 & = \mathbb{E}_{\mathbf{z} \sim q_\phi(\mathbf{z}\vert\mathbf{x})} \log p_\theta(\mathbf{x}\vert\mathbf{z}) - \beta D_\text{KL}(q_\phi(\mathbf{z}\vert\mathbf{x})\|p_\theta(\mathbf{z})) + \beta \delta & \\
-& \geq \mathbb{E}_{\mathbf{z} \sim q_\phi(\mathbf{z}\vert\mathbf{x})} \log p_\theta(\mathbf{x}\vert\mathbf{z}) - \beta D_\text{KL}(q_\phi(\mathbf{z}\vert\mathbf{x})\|p_\theta(\mathbf{z})) & \scriptstyle{\text{; Because }\beta,\delta\geq 0}
+& \geqslant \mathbb{E}_{\mathbf{z} \sim q_\phi(\mathbf{z}\vert\mathbf{x})} \log p_\theta(\mathbf{x}\vert\mathbf{z}) - \beta D_\text{KL}(q_\phi(\mathbf{z}\vert\mathbf{x})\|p_\theta(\mathbf{z})) & \scriptstyle{\text{; 因为 }\beta,\delta\geqslant 0}
 \end{aligned}
 $$
- $$\beta$$-VAE
+
+
+$$\beta$$-VAE 的损失函数为：
+
+
 $$
 L_\text{BETA}(\phi, \beta) = - \mathbb{E}_{\mathbf{z} \sim q_\phi(\mathbf{z}\vert\mathbf{x})} \log p_\theta(\mathbf{x}\vert\mathbf{z}) + \beta D_\text{KL}(q_\phi(\mathbf{z}\vert\mathbf{x})\|p_\theta(\mathbf{z}))
 $$
+
+
 r $$\beta$$ i
 
  $$L_\text{BETA}(\phi, \beta)$$  $$\mathcal{F}(\theta, \phi, \beta)$$. 
