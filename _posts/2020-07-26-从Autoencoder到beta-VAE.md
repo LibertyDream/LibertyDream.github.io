@@ -327,14 +327,13 @@ $$
 L_\text{BETA}(\phi, \beta) = - \mathbb{E}_{\mathbf{z} \sim q_\phi(\mathbf{z}\vert\mathbf{x})} \log p_\theta(\mathbf{x}\vert\mathbf{z}) + \beta D_\text{KL}(q_\phi(\mathbf{z}\vert\mathbf{x})\|p_\theta(\mathbf{z}))
 $$
 
+其中拉格朗日乘子 $$\beta$$ 是超参数。
 
-r $$\beta$$ i
+因为对 $$L_\text{BETA}(\phi, \beta)$$ 取反就是 $$\mathcal{F}(\theta, \phi, \beta)$$ 的下界，损失最小化等价于使拉格朗日表达式最大化，从而对我们的原始优化问题一样有效。
 
- $$L_\text{BETA}(\phi, \beta)$$  $$\mathcal{F}(\theta, \phi, \beta)$$. 
+如果 $$\beta=1$$，那就是 VAE。如果 $$\beta > 1$$，那对隐层“瓶口”的限制就更强而且限制了 $$\mathbf{z}$$ 的表示能力。对于条件独立的生产要素而言，保证他们处于解耦状态这样得到的表示是最高效的。所以 $$\beta$$ 愈大隐向量编码就越高效，解耦性就越好。与此同时，更大的 $$\beta$$ 也是对重构质量和解耦程度之间的一种权衡。
 
- $$\beta=1$$,  $$\beta > 1$$, $$\mathbf{z}$$. r $$\beta$$  r $$\beta$$ 
-
- $$\beta$$-VAE  $$\beta$$-VAE
+[Burgess 等人(2017)](https://arxiv.org/pdf/1804.03599.pdf)结合[信息瓶颈理论](https://lilianweng.github.io/lil-log/2017/09/28/anatomize-deep-learning-with-information-theory.html)深入探讨了 $$\beta$$-VAE 的解耦问题，并进一步对 $$\beta$$-VAE 进行了改良，能更好的控制编码表达能力。
 
 ### VQ-VAE 和 VQ-VAE-2
 
