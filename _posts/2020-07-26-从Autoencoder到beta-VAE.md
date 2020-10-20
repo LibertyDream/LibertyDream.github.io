@@ -337,31 +337,52 @@ $$
 
 ### VQ-VAE 和 VQ-VAE-2
 
- $$K$$-
+**VQ-VAE**（“向量量化变分自编码器”；[van den Oord 等人 2017](http://papers.nips.cc/paper/7210-neural-discrete-representation-learning.pdf)）模型用编码器学习离散隐变量，因为对像语言、口语、推理这些问题离散表示可能更自然些。
 
- $$\mathbf{e} \in \mathbb{R}^{K \times D}, i=1, \dots, K$$  $$K$$  $$\mathbf{e}_i \in \mathbb{R}^{D}, i=1, \dots, K$$. 
+矢量量化是种将 $$K$$ 维向量映射为一组“编码”向量的技术，处理过程和 KNN 算法十分相似。映射后欧氏距离最短的就是最优质心编码向量。
 
- $$E(\mathbf{x}) = \mathbf{z}_e$$  $$K$$  $$D(.)$$:
+令 $$\mathbf{e} \in \mathbb{R}^{K \times D}, i=1, \dots, K$$ 为 VQ-VAE 的潜在编码空间（也叫“密码本”），其中 $$K$$ 是隐变量类别数，$$D$$ 是 embedding 大小。单个 embedding 向量记为 $$\mathbf{e}_i \in \mathbb{R}^{D}, i=1, \dots, K$$。
+
+编码器的输出 $$E(\mathbf{x}) = \mathbf{z}_e$$ 会遍历最近邻尝试与 $$K$$ 个 embedding 向量中的某个进行匹配，匹配上的向量就是解码器 $$D(.)$$ 的输入：
+
+
 $$
-\mathbf{z}_q(\mathbf{x}) = \text{Quantize}(E(\mathbf{x})) = \mathbf{e}_k \text{ where } k = \arg\min_i \|E(\mathbf{x}) - \mathbf{e}_i \|_2
+\mathbf{z}_q(\mathbf{x}) = \text{Quantize}(E(\mathbf{x})) = \mathbf{e}_k \text{ 其中 } k = \arg\min_i \|E(\mathbf{x}) - \mathbf{e}_i \|_2
 $$
+
+
+注意，应用不同离散隐变量的规格也不同；比如对文字是 1 维，图像是 2 维，视频是 3 维。
+
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-VQ-VAE.png)
 
- $$\nabla_z L$$  $$\mathbf{z}_q$$ t $$\mathbf{z}_e$$.
-$$
-L = \underbrace{\|\mathbf{x} - D(\mathbf{e}_k)\|_2^2}_{\textrm{reconstruction loss}} + 
-\underbrace{\|\text{sg}[E(\mathbf{x})] - \mathbf{e}_k\|_2^2}_{\textrm{VQ loss}} + 
-\underbrace{\beta \|E(\mathbf{x}) - \text{sg}[\mathbf{e}_k]\|_2^2}_{\textrm{commitment loss}}
-$$
- $$\text{sq}[.]$$ 
+*图 10  VQ-VAE 架构（图片来源：[van den Oord 等人，2017](http://papers.nips.cc/paper/7210-neural-discrete-representation-learning.pdf)）*
 
- $$\mathbf{e}_i$$,  $$n_i$$  $$\{\mathbf{z}_{i,j}\}_{j=1}^{n_i}$$, $$\mathbf{e}_i$$:
+因为 argmin() 在离散空间里无法求导，解码器输入 $$\mathbf{z}_q$$ 的梯度 $$\nabla_z L$$ 就直接复制给编码器输出 $$\mathbf{z}_e$$。除了重构损失，VQ-VAE 还在尝试优化：
+
+- VQ 损失：embedding 空间和编码器输出间的 L2 误差
+- 交付损失：一种鼓励编码器输出向 embedding 空间靠近的措施，也是为了防止过于频繁地从一个编码向量跳向另一个。
+
+
+$$
+L = \underbrace{\|\mathbf{x} - D(\mathbf{e}_k)\|_2^2}_{\textrm{重构损失}} + 
+\underbrace{\|\text{sg}[E(\mathbf{x})] - \mathbf{e}_k\|_2^2}_{\textrm{VQ 损失}} + 
+\underbrace{\beta \|E(\mathbf{x}) - \text{sg}[\mathbf{e}_k]\|_2^2}_{\textrm{交付损失}}
+$$
+
+
+其中 $$\text{sq}[.]$$ 是 `stop_gradient` (停止梯度) 算符。
+
+密码簿中的 embedding 向量是靠 EMA（指数移动均值）进行更新。给定一个编码向量 $$\mathbf{e}_i$$，假设编码器有 $$n_i$$ 个输出向量，对 $$\mathbf{e}_i$$ 的量化结果就是 $$\{\mathbf{z}_{i,j}\}_{j=1}^{n_i}$$。
+
+
 $$
 N_i^{(t)} = \gamma N_i^{(t-1)} + (1-\gamma)n_i^{(t)}\;\;\;
 \mathbf{m}_i^{(t)} = \gamma \mathbf{m}_i^{(t-1)} + (1-\gamma)\sum_{j=1}^{n_i^{(t)}}\mathbf{z}_{i,j}^{(t)}\;\;\;
 \mathbf{e}_i^{(t)} = \mathbf{m}_i^{(t)} / N_i^{(t)}
 $$
- $$(t)$$ . $$N_i$$ and $$\mathbf{m}_i$$ 
+
+
+其中 $$(t)$$ 是指按时间顺序进行批处理。$$N_i$$ 和 $$\mathbf{m}_i$$ 分别计算向量个数和容积。
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-VQ-VAE-2.png)
 
