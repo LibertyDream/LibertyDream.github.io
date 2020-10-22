@@ -381,8 +381,9 @@ N_i^{(t)} = \gamma N_i^{(t-1)} + (1-\gamma)n_i^{(t)}\;\;\;
 \mathbf{e}_i^{(t)} = \mathbf{m}_i^{(t)} / N_i^{(t)}
 $$
 
-
 其中 $$(t)$$ 是指按时间顺序进行批处理。$$N_i$$ 和 $$\mathbf{m}_i$$ 分别计算向量个数和容积。
+
+1. 1 阶段是训练分级 VQ-VAE：设计分级隐变量的初衷是从整体信息（即物体形状）中分离出局部模式（即构造）。较小的顶层编码的训练是建立在较大的底层密码簿的训练之上的，所以不必每层都从头学。
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-VQ-VAE-2.png)
 
