@@ -386,21 +386,31 @@ $$
 1. 1 阶段是**训练分级 VQ-VAE**：设计分级隐变量的初衷是从整体信息（即物体形状）中分离出局部模式（即构造）。较小的顶层编码的训练是建立在较大的底层密码簿的训练之上的，所以不必每层都从头学。
 2. 2 阶段基于隐式离散密码簿学习先验分布，好从中采样生成图像。这样解码器可以从与被训分布相似的分布中得到输入向量。为了学习先验分布，用到了强大的带多头自注意力层的自回归模型（像 [PixelSNAIL; Chen et al 2017](https://arxiv.org/abs/1712.09763)）
 
-考虑到 VQ-VAE-2 靠简单层级设置下的离散隐变量生成的图像效果还很好，着实令人惊叹。
+考虑到 VQ-VAE-2 靠简单设置下层级得到的离散隐变量，取得了那样的图像生成效果，还是蛮令人惊奇的。
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-VQ-VAE-2.png)
 
-
+*图 11  分级 VQ-VAE 架构与多阶图像生成（图片来源： [Ali Razavi 等，2019](https://arxiv.org/abs/1906.00446)）*
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-VQ-VAE-2-algo.png)
 
+*图 12  VQ-VAE-2 算法（图片来源：[Ali Razavi 等，2019](https://arxiv.org/abs/1906.00446)）*
+
 ### TD-VAE
+
+**TD-VAE**（“时差 VAE”；[Gregor 等, 2019](https://arxiv.org/abs/1806.03107)）面向序列化数据，主要靠三点，下面细讲。
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-TD-VAE-state-space.png)
 
-s $$\mathbf{z} = (z_1, \dots, z_T)$$  $$\mathbf{x} = (x_1, \dots, x_T)$$. r $$p(z \vert x)$$  $$q(z \vert x)$$.
+*图 13  将状态空间模型作为马尔可夫链模型*
 
- $$b_t = belief(x_1, \dots, x_t) = belief(b_{t-1}, x_t)$$.  $$p(x_{t+1}, \dots, x_T \vert x_1, \dots, x_t) \approx p(x_{t+1}, \dots, x_T \vert b_t)$$. $$b_t = \text{RNN}(b_{t-1}, x_t)$$.
+**（1）状态空间模型**
+
+（隐式）状态空间模型中，一系列未观测到的隐状态 $$\mathbf{z} = (z_1, \dots, z_T)$$ 决定了观测状态 $$\mathbf{x} = (x_1, \dots, x_T)$$。图 13 中马尔可夫链模型的每一时刻都能以类似图 6 中的方式训练，而难搞的后验概率 $$p(z \vert x)$$ 用函数 $$q(z \vert x)$$ 来近似。
+
+**（2）信仰状态**
+
+代理人要学会对过往所有状态进行编码以推断未来，这被称为*信仰状态*，$$b_t = belief(x_1, \dots, x_t) = belief(b_{t-1}, x_t)$$。由此，以过往状态为条件未来的状态分布可以写为 $$p(x_{t+1}, \dots, x_T \vert x_1, \dots, x_t) \approx p(x_{t+1}, \dots, x_T \vert b_t)$$。循环策略里的隐态用作 TD-VAE 里代理的信仰状态。所以有 $$b_t = \text{RNN}(b_{t-1}, x_t)$$
 $$
 \begin{aligned}
 \log p(x) 
