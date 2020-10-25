@@ -411,18 +411,28 @@ $$
 **（2）信仰状态**
 
 代理人要学会对过往所有状态进行编码以推断未来，这被称为*信仰状态*，$$b_t = belief(x_1, \dots, x_t) = belief(b_{t-1}, x_t)$$。由此，以过往状态为条件未来的状态分布可以写为 $$p(x_{t+1}, \dots, x_T \vert x_1, \dots, x_t) \approx p(x_{t+1}, \dots, x_T \vert b_t)$$。循环策略里的隐态用作 TD-VAE 里代理的信仰状态。所以有 $$b_t = \text{RNN}(b_{t-1}, x_t)$$
+
+**（3）跳跃预测**
+
+进一步地，代理人应该能基于目前已有信息去想象遥远的未来，也就是说能进行跳跃式的预测，提前几步预测到未来之事。
+
+想一下[上面](# 损失函数：ELBO)讲到的方差下界：
+
+
 $$
 \begin{aligned}
 \log p(x) 
-&\geq \log p(x) - D_\text{KL}(q(z|x)\|p(z|x)) \\
+&\geqslant \log p(x) - D_\text{KL}(q(z|x)\|p(z|x)) \\
 &= \mathbb{E}_{z\sim q} \log p(x|z) - D_\text{KL}(q(z|x)\|p(z)) \\
 &= \mathbb{E}_{z \sim q} \log p(x|z) - \mathbb{E}_{z \sim q} \log \frac{q(z|x)}{p(z)} \\
 &= \mathbb{E}_{z \sim q}[\log p(x|z) -\log q(z|x) + \log p(z)] \\
 &= \mathbb{E}_{z \sim q}[\log p(x, z) -\log q(z|x)] \\
 \log p(x) 
-&\geq \mathbb{E}_{z \sim q}[\log p(x, z) -\log q(z|x)]
+&\geqslant \mathbb{E}_{z \sim q}[\log p(x, z) -\log q(z|x)]
 \end{aligned}
 $$
+
+
  $$x_{<t}$$  $$z_t$$ and $$z_{t-1}$$, 
 $$
 \log p(x_t|x_{<t}) \geq \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t, z_{t-1}, z_{t}|x_{<t}) -\log q(z_{t-1}, z_t|x_{\leq t})]
