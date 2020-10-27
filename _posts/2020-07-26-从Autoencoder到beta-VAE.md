@@ -419,6 +419,7 @@ $$
 想一下[上面](# 损失函数：ELBO)讲到的方差下界：
 
 
+
 $$
 \begin{aligned}
 \log p(x) 
@@ -433,43 +434,63 @@ $$
 $$
 
 
- $$x_{<t}$$  $$z_t$$ and $$z_{t-1}$$, 
+
+基于过往全部状态 $$x_{<t}$$ 和两个隐变量 $$z_t$$、$$z_{t-1}$$， 对状态 $$x_t$$ 的分布建模，考虑当前和上一步的情况；
+
+
 $$
-\log p(x_t|x_{<t}) \geq \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t, z_{t-1}, z_{t}|x_{<t}) -\log q(z_{t-1}, z_t|x_{\leq t})]
+\log p(x_t|x_{<t}) \geqslant \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t, z_{t-1}, z_{t}|x_{<t}) -\log q(z_{t-1}, z_t|x_{\leqslant t})]
 $$
+
+
+
+将方程展开：
+
 
 $$
 \begin{aligned}
 & \log p(x_t|x_{<t}) \\
-&\geq \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t, z_{t-1}, z_{t}|x_{<t}) -\log q(z_{t-1}, z_t|x_{\leq t})] \\
-&\geq \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t|\color{red}{z_{t-1}}, z_{t}, \color{red}{x_{<t}}) + \color{blue}{\log p(z_{t-1}, z_{t}|x_{<t})} -\log q(z_{t-1}, z_t|x_{\leq t})] \\
-&\geq \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t|z_{t}) + \color{blue}{\log p(z_{t-1}|x_{<t})} + \color{blue}{\log p(z_{t}|z_{t-1})} - \color{green}{\log q(z_{t-1}, z_t|x_{\leq t})}] \\
-&\geq \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t|z_{t}) + \log p(z_{t-1}|x_{<t}) + \log p(z_{t}|z_{t-1}) - \color{green}{\log q(z_t|x_{\leq t})} - \color{green}{\log q(z_{t-1}|z_t, x_{\leq t})}]
+&\geqslant \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t, z_{t-1}, z_{t}|x_{<t}) -\log q(z_{t-1}, z_t|x_{\leqslant t})] \\
+&\geqslant \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t|\color{red}{z_{t-1}},\color{black}{z_{t}}, \color{red}{x_{<t}}) + \color{blue}{\log p(z_{t-1}, z_{t}|x_{<t})} \color{black}{-\log q(z_{t-1}, z_t|x_{\leqslant t})]} \\
+&\geqslant \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t|z_{t}) + \color{blue}{\log p(z_{t-1}|x_{<t})} + \color{blue}{\log p(z_{t}|z_{t-1})} - \color{green}{\log q(z_{t-1}, z_t|x_{\leqslant t})}] \\
+&\geqslant \mathbb{E}_{(z_{t-1}, z_t) \sim q}[\log p(x_t|z_{t}) + \log p(z_{t-1}|x_{<t}) + \log p(z_{t}|z_{t-1}) - \color{green}{\log q(z_t|x_{\leqslant t})} - \color{green}{\log q(z_{t-1}|z_t, x_{\leqslant t})}]
 \end{aligned}
 $$
 
-1. $$p_D(.)$$
 
-- $$p(x_t \mid z_t)$$
-- $$p(x_t \mid z_t) \to p_D(x_t \mid z_t)$$;
 
-2. $$p_T(.)$$
+注意两点：
 
-- $$p(z_t \mid z_{t-1})$$
+- <span style='color: red;'>红色</span>项按马尔可夫假设可以忽略
+- <span style='color: blue;'>蓝色</span>项可以按马尔克夫假设展开
+- 作为平滑分布，<span style='color: green;'>绿色</span>项拓展为包括对上一步预测回溯的形式
+
+更确切地讲，有四类分布要学：
+
+1. **解码器**分布 $$p_D(.)$$
+
+- $$p(x_t \mid z_t)$$ 是一般意义下的编码器
+- $$p(x_t \mid z_t) \to p_D(x_t \mid z_t)$$
+
+2. **转换**分布 $$p_T(.)$$
+
+- $$p(z_t \mid z_{t-1})$$ 表示隐变量间的顺序依赖关系
 - $$p(z_t \mid z_{t-1}) \to p_T(z_t \mid z_{t-1})$$;
 
-3. $$p_B(.)$$
+3. **信念**分布 $$p_B(.)$$
 
--  $$p(z_{t-1} \mid x_{<t})$$ and $$q(z_t \mid x_{\leq t})$$ 
+-  $$p(z_{t-1} \mid x_{<t})$$ 和 $$q(z_t \mid x_{\leqslant t})$$ 都可以用信念状态预测隐变量
 - $$p(z_{t-1} \mid x_{<t}) \to p_B(z_{t-1} \mid b_{t-1})$$;
-- $$q(z_{t} \mid x_{\leq t}) \to p_B(z_t \mid b_t)$$;
+- $$q(z_{t} \mid x_{\leqslant t}) \to p_B(z_t \mid b_t)$$;
 
-4. $$p_S(.)$$
+4. **平滑**分布 $$p_S(.)$$
 
-- $$q(z_{t-1} \mid z_t, x_{\leq t})$$ c
-- $$q(z_{t-1} \mid z_t, x_{\leq t}) \to  p_S(z_{t-1} \mid z_t, b_{t-1}, b_t)$$;
+- 回溯平滑项 $$q(z_{t-1} \mid z_t, x_{\leqslant t})$$ 也可以重写成依赖信念状态的形式
+- $$q(z_{t-1} \mid z_t, x_{\leqslant t}) \to  p_S(z_{t-1} \mid z_t, b_{t-1}, b_t)$$;
 
- $$t, t+1$$,  $$t_1 < t_2$$. 
+基于跳跃预测的思想，连续的 ELBO 不仅要处理 $$t, t+1$$ 的情况，还要处理有点距离的时间戳  $$t_1 < t_2$$ 下的情景。 最终要最大化的 TD-VAE 目标函数为：
+
+
 $$
 J_{t_1, t_2} = \mathbb{E}[
   \log p_D(x_{t_2}|z_{t_2}) 
@@ -478,4 +499,8 @@ J_{t_1, t_2} = \mathbb{E}[
   - \log p_B(z_{t_2}|b_{t_2}) 
   - \log p_S(z_{t_1}|z_{t_2}, b_{t_1}, b_{t_2})]
 $$
+
+
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-TD-VAE.png)
+
+*图 14  TD-VAE 架构概览（图片来源：[TD-VAE 论文](https://arxiv.org/abs/1806.03107)）*
