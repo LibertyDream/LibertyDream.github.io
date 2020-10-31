@@ -112,15 +112,15 @@ $$
 
 **稀疏 $$k$$ 自编码器**
 
-稀疏 $$k$$ 自编码器（$$k$$-Sparse Autoencoder，[Makhzani and Frey, 2013](https://arxiv.org/abs/1312.5663)）是在线性激活的瓶颈层里只保留 k 个激活度最高的，以此来保证稀疏性。首先前馈地走过编码器网络得到降维隐编码 $$\mathbf{z} = g(\mathbf{x})$$。对向量 $$\mathbf{z}$$ 的值排序，其中 k 个最大的保留其它的归零。这也可以在能调节阈值的 ReLU 层完成。于是现在就有了稀疏编码 $$\mathbf{z}’ = \text{Sparsify}(\mathbf{z})$$。计算稀疏编码的结果和损失， $$L = \|\mathbf{x} - f(\mathbf{z}') \|_2^2$$。反向传播也只在前 k 个激活了的隐层单元上进行。
+稀疏 $$k$$ 自编码器（$$k$$-Sparse Autoencoder，[Makhzani 和 Frey, 2013](https://arxiv.org/abs/1312.5663)）是在线性激活的瓶颈层里只保留 k 个激活度最高的，以此来保证稀疏性。首先前馈地走过编码器网络得到降维隐编码 $$\mathbf{z} = g(\mathbf{x})$$。对向量 $$\mathbf{z}$$ 的值排序，其中 k 个最大的保留其它的归零。这也可以在能调节阈值的 ReLU 层完成。于是现在就有了稀疏编码 $$\mathbf{z}’ = \text{Sparsify}(\mathbf{z})$$。计算稀疏编码的结果和损失， $$L = \|\mathbf{x} - f(\mathbf{z}') \|_2^2$$。反向传播也只在前 k 个激活了的隐层单元上进行。
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-k-sparse-autoencoder.png)
 
-*图 5  不同稀疏水平 k 下的稀疏 k 自编码器的滤镜（图片来源： [Makhzani 与 Frey, 2013](https://arxiv.org/abs/1312.5663)）*
+*图 5  不同稀疏水平 k 下的稀疏 k 自编码器的滤镜（图片来源： [Makhzani 和 Frey, 2013](https://arxiv.org/abs/1312.5663)）*
 
 ### 可收缩自编码器
 
-类似于稀疏自编码器，**可收缩自编码器**（**Contractive Autoencoder**，[Rifai, et al, 2011](http://www.icml-2011.org/papers/455_icmlpaper.pdf)）希望学到的表示处于一个可收缩的空间内，这样鲁棒性更好。
+类似于稀疏自编码器，**可收缩自编码器**（**Contractive Autoencoder**，[Rifai 等，2011](http://www.icml-2011.org/papers/455_icmlpaper.pdf)）希望学到的表示处于一个可收缩的空间内，这样鲁棒性更好。
 
 它在损失函数中加了一项来惩罚那些对输入太过敏感的表示，提高了对训练数据周围细微扰动的鲁棒度。敏感度的测定是结合输入，计算编码器激活的雅可比矩阵的 Frobenius 范数实现的。
 
@@ -307,7 +307,7 @@ $$
 
 比如，基于人脸照片训练的模型可以捕捉到性别、肤色、发色、发长和情绪等属性，无论是否带了眼镜，无论在各维度上是否存在许多其他相对独立的要素。这种解耦表示对面部图像生成来讲大有用处。
 
-β-VAE([Higgins et al., 2017](https://openreview.net/forum?id=Sy2fzU9gl)) 是变分自编码器的一个变种，专门针对解耦态隐因子的发掘。照 VAE 的思路，要在使生成真实数据的概率最大化的同时，令实际分布与猜测的后验分布间差距足够小（比一个够小的常数 $$\delta$$ 小）：
+β-VAE([Higgins 等, 2017](https://openreview.net/forum?id=Sy2fzU9gl)) 是变分自编码器的一个变种，专门针对解耦态隐因子的发掘。照 VAE 的思路，要在使生成真实数据的概率最大化的同时，令实际分布与猜测的后验分布间差距足够小（比一个够小的常数 $$\delta$$ 小）：
 
 
 
@@ -354,7 +354,7 @@ $$
 
 ### VQ-VAE 和 VQ-VAE-2
 
-**VQ-VAE**（“向量量化变分自编码器”；[van den Oord 等， 2017](http://papers.nips.cc/paper/7210-neural-discrete-representation-learning.pdf)）模型用编码器学习离散隐变量，因为对像语言、口语、推理这些问题离散表示可能更自然些。
+**VQ-VAE**（“向量量化变分自编码器”；[van den Oord 等，2017](http://papers.nips.cc/paper/7210-neural-discrete-representation-learning.pdf)）模型用编码器学习离散隐变量，因为对像语言、口语、推理这些问题离散表示可能更自然些。
 
 矢量量化是种将 $$K$$ 维向量映射为一组有限的“编码”向量的技术，处理过程和 KNN 算法十分相似。映射后欧氏距离最短的就是最优质心编码向量。
 
@@ -405,10 +405,10 @@ $$
 
 其中 $$(t)$$ 是指按时间顺序进行批处理。$$N_i$$ 和 $$\mathbf{m}_i$$ 分别计算向量个数和容积。
 
-VQ-VAE-2 ([Ali Razavi 等， 2019](https://arxiv.org/abs/1906.00446))  是结合自注意自回归模型的二级 VQ-VAE。
+VQ-VAE-2 ([Ali Razavi 等，2019](https://arxiv.org/abs/1906.00446))  是结合自注意自回归模型的二级 VQ-VAE。
 
 1. 1 阶段是**训练分级 VQ-VAE**：设计分级隐变量的初衷是从整体信息（即物体形状）中分离出局部模式（即基本结构）。较大的底层编码簿的训练以较小的顶层编码为前提，所以不必什么都从头学。
-2. 2 阶段**基于隐式离散编码簿学习先验分布**，好从中采样并生成图像。这样解码器可以从与正在训练的分布相似的分布中得到输入向量。为了学习先验分布，还用上了强大的带多头自注意力层的自回归模型（像 [PixelSNAIL; Chen et al 2017](https://arxiv.org/abs/1712.09763)）
+2. 2 阶段**基于隐式离散编码簿学习先验分布**，好从中采样并生成图像。这样解码器可以从与正在训练的分布相似的分布中得到输入向量。为了学习先验分布，还用上了强大的带多头自注意力层的自回归模型（像 [PixelSNAIL; Chen 等，2017](https://arxiv.org/abs/1712.09763)）
 
 考虑到 VQ-VAE-2 靠简单层级设置下的离散隐变量，取得了那样的图像生成效果，还是蛮令人惊奇的。
 
@@ -434,7 +434,7 @@ VQ-VAE-2 ([Ali Razavi 等， 2019](https://arxiv.org/abs/1906.00446))  是结合
 
 **（2）信仰状态**
 
-代理人要学会对过往所有状态进行编码以推断未来，这被称为*信仰状态*，$$b_t = belief(x_1, \dots, x_t) = belief(b_{t-1}, x_t)$$。由此，以过往状态为条件未来的状态分布可以写为 $$p(x_{t+1}, \dots, x_T \vert x_1, \dots, x_t) \approx p(x_{t+1}, \dots, x_T \vert b_t)$$。循环策略里的隐态用作 TD-VAE 里代理的信仰状态。所以有 $$b_t = \text{RNN}(b_{t-1}, x_t)$$
+代理人要学会对过往所有状态进行编码以推断未来，这被称为*信仰状态*，$$b_t = belief(x_1, \dots, x_t) = belief(b_{t-1}, x_t)$$。由此，以过往状态为条件未来的状态分布可以写为 $$p(x_{t+1}, \dots, x_T \vert x_1, \dots, x_t) \approx p(x_{t+1}, \dots, x_T \vert b_t)$$。循环策略里的隐态用来充当 TD-VAE 里代理人的信仰状态。所以有 $$b_t = \text{RNN}(b_{t-1}, x_t)$$
 
 **（3）跳跃预测**
 
@@ -459,7 +459,8 @@ $$
 
 
 
-基于过往全部状态 $$x_{<t}$$ 和两个隐变量 $$z_t$$、$$z_{t-1}$$， 对状态 $$x_t$$ 的分布建模，考虑当前和上一步的情况；
+基于过往全部状态 $$x_{<t}$$ 和两个隐变量 $$z_t$$、$$z_{t-1}$$，现在对状态 $$x_t$$ 的分布建模，考虑当前和上一步：
+
 
 
 $$
@@ -468,7 +469,7 @@ $$
 
 
 
-将方程展开：
+继续将方程展开：
 
 
 $$
@@ -487,32 +488,33 @@ $$
 
 - <span style='color: red;'>红色</span>项按马尔可夫假设可以忽略
 - <span style='color: blue;'>蓝色</span>项可以按马尔克夫假设展开
-- 作为平滑分布，<span style='color: green;'>绿色</span>项拓展为包括对上一步预测回溯的形式
+- <span style='color: green;'>绿色</span>项拓展为带有对上一步预测的回溯形式（充当平滑分布）
 
 更确切地讲，有四类分布要学：
 
 1. **解码器**分布 $$p_D(.)$$
 
-- $$p(x_t \mid z_t)$$ 是一般意义下的编码器
-- $$p(x_t \mid z_t) \to p_D(x_t \mid z_t)$$
+- $$p(x_t \mid z_t)$$ 是一般意义下的解码器
+- $$p(x_t \mid z_t) \to p_D(x_t \mid z_t)$$；
 
 2. **转换**分布 $$p_T(.)$$
 
 - $$p(z_t \mid z_{t-1})$$ 表示隐变量间的顺序依赖关系
 - $$p(z_t \mid z_{t-1}) \to p_T(z_t \mid z_{t-1})$$;
 
-3. **信念**分布 $$p_B(.)$$
+3. **信仰**分布 $$p_B(.)$$
 
--  $$p(z_{t-1} \mid x_{<t})$$ 和 $$q(z_t \mid x_{\leqslant t})$$ 都可以用信念状态预测隐变量
+-  $$p(z_{t-1} \mid x_{<t})$$ 和 $$q(z_t \mid x_{\leqslant t})$$ 都可以用信仰状态预测隐变量
 - $$p(z_{t-1} \mid x_{<t}) \to p_B(z_{t-1} \mid b_{t-1})$$;
 - $$q(z_{t} \mid x_{\leqslant t}) \to p_B(z_t \mid b_t)$$;
 
 4. **平滑**分布 $$p_S(.)$$
 
-- 回溯平滑项 $$q(z_{t-1} \mid z_t, x_{\leqslant t})$$ 也可以重写成依赖信念状态的形式
+- 回溯平滑项 $$q(z_{t-1} \mid z_t, x_{\leqslant t})$$ 也可以重写成依赖信仰状态的形式
 - $$q(z_{t-1} \mid z_t, x_{\leqslant t}) \to  p_S(z_{t-1} \mid z_t, b_{t-1}, b_t)$$;
 
 基于跳跃预测的思想，连续的 ELBO 不仅要处理 $$t, t+1$$ 的情况，还要处理有点距离的时间戳  $$t_1 < t_2$$ 下的情景。 最终要最大化的 TD-VAE 目标函数为：
+
 
 
 $$
@@ -523,6 +525,7 @@ J_{t_1, t_2} = \mathbb{E}[
   - \log p_B(z_{t_2}|b_{t_2}) 
   - \log p_S(z_{t_1}|z_{t_2}, b_{t_1}, b_{t_2})]
 $$
+
 
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/20200912-TD-VAE.png)
