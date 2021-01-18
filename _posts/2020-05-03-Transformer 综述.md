@@ -71,7 +71,7 @@ $$
 
 ### Transformer
 
-**Transformer**（这里指代 vanilla Transformer，以和其他强化版做区分; [Vaswani 等, 2017](https://arxiv.org/abs/1706.03762)）模型采用编码器-解码器架构，这也是多数 [NMT](https://libertydream.github.io/2020/04/26/Attention-综述#为翻译而生)  模型所采用的模式。后来只采用编码器/解码器的 Transformer 在语言模型任务中取得了亮眼表现，比如 [BERT](https://libertydream.github.io/2019/11/16/NLP-迁移学习演化之路/) 和 [GPT-2](https://libertydream.github.io/2019/11/23/图解GPT-2/)。
+**Transformer**（这里指代普通 Transformer，以和其他强化版做区分; [Vaswani 等, 2017](https://arxiv.org/abs/1706.03762)）模型采用编码器-解码器架构，这也是多数 [NMT](https://libertydream.github.io/2020/04/26/Attention-综述#为翻译而生)  模型所采用的模式。后来只采用编码器/解码器的 Transformer 在语言模型任务中取得了亮眼表现，比如 [BERT](https://libertydream.github.io/2019/11/16/NLP-迁移学习演化之路/) 和 [GPT-2](https://libertydream.github.io/2019/11/23/图解GPT-2/)。
 
 #### 编码器-解码器架构
 
@@ -83,7 +83,7 @@ $$
 
 #### 位置编码
 
-因为自注意运算是排列不变的，所以用适当的**位置编码**给模型注入 _顺序信息_ 十分重要。位置编码 $$\mathbf{P} \in \mathbb{R}^{L \times d}$$ 有着和输入嵌入相同的维数，所以可以直接加在输入上。vanilla Transformer 考虑了两种编码方式：
+因为自注意运算是排列不变的，所以用适当的**位置编码**给模型注入 _顺序信息_ 十分重要。位置编码 $$\mathbf{P} \in \mathbb{R}^{L \times d}$$ 有着和输入嵌入相同的维数，所以可以直接加在输入上。普通 Transformer 考虑了两种编码方式：
 
 （1）_正弦位置编码_ 定义如下，给定标识位置 $$i=1,\dots,L$$ 和维度 $$\delta=1,\dots,d$$：
 $$
@@ -101,7 +101,7 @@ $$
 
 #### 后继
 
-紧跟着 vanilla Transformer，[Al-Rfou 等 (2018)](https://arxiv.org/abs/1808.04444) 加上了一系列辅助损失，从而能在字符层面训练深度 Transformer 语言模型，其表现优于一众 LSTM 模型。该模型主要添加了几类辅助任务：
+紧跟着普通 Transformer，[Al-Rfou 等 (2018)](https://arxiv.org/abs/1808.04444) 加上了一系列辅助损失，从而能在字符层面训练深度 Transformer 语言模型，其表现优于一众 LSTM 模型。该模型主要添加了几类辅助任务：
 
 - 相较于只在序列尾端指生成一个预测，每个_即时位置_ 也被要求做出恰当预测，给定更小的上下文环境强迫模型预估（比如上下文窗口开始处的第一对标识）
 - Transformer 的各个中间层也要进行预测。训练过程中层次越低参与权重越小，带来的总体损失也越小
@@ -177,7 +177,7 @@ $$
 
 #### 更长的跨度
 
-vanilla Transformer 的注意力跨度是固定且有限的。每次模型都是在处理相同片段中的其余元素，同时各个定长片段间的信息也不能交流。
+普通 Transformer 的注意力跨度是固定且有限的。每次模型都是在处理相同片段中的其余元素，同时各个定长片段间的信息也不能交流。
 
 这种 _上下文片段_ 导致以下一些问题：
 
@@ -192,7 +192,7 @@ vanilla Transformer 的注意力跨度是固定且有限的。每次模型都是
 
 #### -- 隐态复用
 
-通过接连不断的使用前一片段的隐态，模型在片段间构建了循环连接关系。下图对比了片段长度为 4 时 vanilla Transformer 和 Transformer-XL 的训练状态
+通过接连不断的使用前一片段的隐态，模型在片段间构建了循环连接关系。下图对比了片段长度为 4 时普通 Transformer 和 Transformer-XL 的训练状态
 
 ![](https://raw.githubusercontent.com/LibertyDream/diy_img_host/master/img/2020-04-30_transformer-XL-training.png)
 
@@ -214,7 +214,7 @@ $$
 
 #### -- 相对位置编码
 
-要适配这种新型注意力跨度，Transformer-XL 提出了新型的位置编码方式。如果依旧使用和 vanilla Transformer 一样的方法对绝对位置编码，先前片段和当前片段的编码就没差别了，这不是我们想要的。
+要适配这种新型注意力跨度，Transformer-XL 提出了新型的位置编码方式。如果依旧使用和普通 Transformer 一样的方法对绝对位置编码，先前片段和当前片段的编码就没差别了，这不是我们想要的。
 
 为了使位置编码随片段移动而变化，Transformer-XL 选择对 _相对位置_ 进行编码，毕竟要做出好预测知道相对偏移量就够了，也就是键向量 $$\mathbf{k}_{\tau, j}$$ 和其查询向量 $$\mathbf{q}_{\tau, i}$$ 间的跨度 $$i -j$$。
 
@@ -323,7 +323,7 @@ _图中展示了视觉输入的 1D 和 2D 注意力跨度，黑线标出了查�
 
 #### 稀疏注意力矩阵分解
 
-vanilla Transformer 的计算和记忆开销与序列长度二次方成正比，所以很难用到超长序列上。
+普通 Transformer 的计算和记忆开销与序列长度二次方成正比，所以很难用到超长序列上。
 
 **Sparse Transformer** ([Child 等, 2019](https://arxiv.org/abs/1904.10509)) 提出 _因子分解自注意_ 模型，通过对稀疏矩阵进行因子分解使得在长达 16,384 的序列上训练百层稠密注意力网络成为可能，一般而言这对当代硬件设备来说是不可能的任务。
 
@@ -384,7 +384,7 @@ $$
 
 1. 每个残差块一种注意力然后穿插交织。<br/> $$\text{attention}(\mathbf{X}) = \text{Attend}(\mathbf{X}, A^{(n \mod p)}) \mathbf{W}^o$$ ，其中当前残差块索引为 $$n$$
 2. 设置一个所有因子分解头都要关照的头。<br/>$$\text{attention}(\mathbf{X}) = \text{Attend}(\mathbf{X}, \cup_{m=1}^p A^{(m)}) \mathbf{W}^o $$。
-3. 使用多头注意力机制，但与 vanilla Transformer 不同的是，每个头可能会采用上述模式之一，1 或 2 => 这么选通常效果最好
+3. 使用多头注意力机制，但与普通 Transformer 不同的是，每个头可能会采用上述模式之一，1 或 2 => 这么选通常效果最好
 
 Sparse Transformer 还提出了一系列变革从而能训练上百层 Transformer，包括梯度检查点，反向传播时重计算注意力与 FF 层，混合精度训练，高效实现块稀疏操作等等。更多相关内容请看[论文](https://arxiv.org/abs/1904.10509)
 
