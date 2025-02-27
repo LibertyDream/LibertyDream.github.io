@@ -2,67 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://libertydream.github.io/en/p/demo_chap/</loc>
+    <loc>http://localhost:1313/en/p/demo_chap/</loc>
     <lastmod>2025-02-27T00:30:58+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://libertydream.github.io/p/demo_chap/"
+                href="http://localhost:1313/p/demo_chap/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://libertydream.github.io/en/p/demo_chap/"
+                href="http://localhost:1313/en/p/demo_chap/"
                 />
   </url><url>
-    <loc>https://libertydream.github.io/en/</loc>
+    <loc>http://localhost:1313/en/</loc>
     <lastmod>2025-02-27T00:30:58+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://libertydream.github.io/"
+                href="http://localhost:1313/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://libertydream.github.io/en/"
+                href="http://localhost:1313/en/"
                 />
   </url><url>
-    <loc>https://libertydream.github.io/en/post/</loc>
+    <loc>http://localhost:1313/en/post/</loc>
     <lastmod>2025-02-27T00:30:58+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://libertydream.github.io/post/"
+                href="http://localhost:1313/post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://libertydream.github.io/en/post/"
+                href="http://localhost:1313/en/post/"
                 />
   </url><url>
-    <loc>https://libertydream.github.io/en/categories/</loc>
+    <loc>http://localhost:1313/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://libertydream.github.io/categories/"
+                href="http://localhost:1313/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://libertydream.github.io/en/categories/"
+                href="http://localhost:1313/en/categories/"
                 />
   </url><url>
-    <loc>https://libertydream.github.io/en/tags/</loc>
+    <loc>http://localhost:1313/en/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://libertydream.github.io/tags/"
+                href="http://localhost:1313/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://libertydream.github.io/en/tags/"
+                href="http://localhost:1313/en/tags/"
                 />
   </url>
 </urlset>
