@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Moonlit Retreat</title>
+        <link>https://libertydream.github.io/en/post/</link>
+        <description>Recent content in Posts on Moonlit Retreat</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>一轩明月</copyright>
+        <lastBuildDate>Thu, 27 Feb 2025 00:30:58 +0800</lastBuildDate><atom:link href="https://libertydream.github.io/en/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Demo_chap</title>
+        <link>https://libertydream.github.io/en/p/demo_chap/</link>
+        <pubDate>Thu, 27 Feb 2025 00:30:58 +0800</pubDate>
+        
+        <guid>https://libertydream.github.io/en/p/demo_chap/</guid>
+        <description>&lt;h2 id=&#34;title&#34;&gt;Title
+&lt;/h2&gt;&lt;p&gt;Hello world&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
