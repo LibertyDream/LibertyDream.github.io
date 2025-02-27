@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>一轩明月</copyright>
-        <lastBuildDate>Wed, 09 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Test</title>
-        <link>https://libertydream.github.io/categories/test/</link>
-        <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
+        <lastBuildDate>Thu, 27 Feb 2025 14:16:55 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>写作</title>
+        <link>https://libertydream.github.io/categories/%E5%86%99%E4%BD%9C/</link>
+        <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://libertydream.github.io/categories/test/</guid>
-        <description>&lt;img src="https://libertydream.github.io/categories/test/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Test" /&gt;</description>
+        <guid>https://libertydream.github.io/categories/%E5%86%99%E4%BD%9C/</guid>
+        <description></description>
         </item>
         <item>
         <title>测试</title>
@@ -24,28 +24,20 @@
         <description></description>
         </item>
         <item>
-        <title>Syntax</title>
-        <link>https://libertydream.github.io/categories/syntax/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://libertydream.github.io/categories/syntax/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Themes</title>
-        <link>https://libertydream.github.io/categories/themes/</link>
-        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://libertydream.github.io/categories/themes/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>Test With Whitespaces</title>
         <link>https://libertydream.github.io/categories/test-with-whitespaces/</link>
         <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
         
         <guid>https://libertydream.github.io/categories/test-with-whitespaces/</guid>
         <description></description>
+        </item>
+        <item>
+        <title>Test</title>
+        <link>https://libertydream.github.io/categories/test/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://libertydream.github.io/categories/test/</guid>
+        <description>&lt;img src="https://libertydream.github.io/categories/test/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Test" /&gt;</description>
         </item>
         
     </channel>

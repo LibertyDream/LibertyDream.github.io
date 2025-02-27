@@ -2,47 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://libertydream.github.io/en/</loc>
-    <lastmod>2025-02-27T00:30:58+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://libertydream.github.io/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://libertydream.github.io/en/"
-                />
-  </url><url>
-    <loc>https://libertydream.github.io/en/p/demo_chap/</loc>
-    <lastmod>2025-02-27T00:30:58+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://libertydream.github.io/p/demo_chap/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://libertydream.github.io/en/p/demo_chap/"
-                />
-  </url><url>
-    <loc>https://libertydream.github.io/en/post/</loc>
-    <lastmod>2025-02-27T00:30:58+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://libertydream.github.io/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://libertydream.github.io/en/post/"
-                />
-  </url><url>
     <loc>https://libertydream.github.io/en/categories/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -54,34 +15,8 @@
                 href="https://libertydream.github.io/en/categories/"
                 />
   </url><url>
-    <loc>https://libertydream.github.io/en/tags/css/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://libertydream.github.io/tags/css/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://libertydream.github.io/en/tags/css/"
-                />
-  </url><url>
-    <loc>https://libertydream.github.io/en/tags/html/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://libertydream.github.io/tags/html/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://libertydream.github.io/en/tags/html/"
-                />
-  </url><url>
     <loc>https://libertydream.github.io/en/tags/markdown/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -94,11 +29,11 @@
                 />
   </url><url>
     <loc>https://libertydream.github.io/en/p/markdown-syntax-guide/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://libertydream.github.io/p/markdown-syntax-guide/"
+                href="https://libertydream.github.io/p/%E5%8D%9A%E5%AE%A2-markdown-%E8%AF%AD%E6%B3%95%E7%AE%80%E4%BB%8B/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -106,21 +41,40 @@
                 href="https://libertydream.github.io/en/p/markdown-syntax-guide/"
                 />
   </url><url>
-    <loc>https://libertydream.github.io/en/categories/syntax/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <loc>https://libertydream.github.io/en/tags/math/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
+  </url><url>
+    <loc>https://libertydream.github.io/en/p/math-typesetting/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://libertydream.github.io/categories/syntax/"
+                href="https://libertydream.github.io/p/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8E%92%E7%89%88/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://libertydream.github.io/en/categories/syntax/"
+                href="https://libertydream.github.io/en/p/math-typesetting/"
                 />
   </url><url>
+    <loc>https://libertydream.github.io/en/post/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://libertydream.github.io/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://libertydream.github.io/en/post/"
+                />
+  </url><url>
+    <loc>https://libertydream.github.io/en/tags/syntax/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
+  </url><url>
     <loc>https://libertydream.github.io/en/tags/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -132,30 +86,98 @@
                 href="https://libertydream.github.io/en/tags/"
                 />
   </url><url>
-    <loc>https://libertydream.github.io/en/categories/themes/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <loc>https://libertydream.github.io/en/categories/writing/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
+  </url><url>
+    <loc>https://libertydream.github.io/en/p/demo_chap/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://libertydream.github.io/categories/themes/"
+                href="https://libertydream.github.io/p/demo_chap/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://libertydream.github.io/en/categories/themes/"
+                href="https://libertydream.github.io/en/p/demo_chap/"
                 />
   </url><url>
-    <loc>https://libertydream.github.io/en/tags/themes/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+    <loc>https://libertydream.github.io/en/archives/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://libertydream.github.io/tags/themes/"
+                href="https://libertydream.github.io/archives/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://libertydream.github.io/en/tags/themes/"
+                href="https://libertydream.github.io/en/archives/"
+                />
+  </url><url>
+    <loc>https://libertydream.github.io/en/page/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://libertydream.github.io/page/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://libertydream.github.io/en/page/"
+                />
+  </url><url>
+    <loc>https://libertydream.github.io/en/about/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://libertydream.github.io/%E5%85%B3%E4%BA%8E/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://libertydream.github.io/en/about/"
+                />
+  </url><url>
+    <loc>https://libertydream.github.io/en/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://libertydream.github.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://libertydream.github.io/en/"
+                />
+  </url><url>
+    <loc>https://libertydream.github.io/en/links/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://libertydream.github.io/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://libertydream.github.io/en/links/"
+                />
+  </url><url>
+    <loc>https://libertydream.github.io/en/search/</loc>
+    <lastmod>2025-02-27T14:16:55+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://libertydream.github.io/search/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://libertydream.github.io/en/search/"
                 />
   </url>
 </urlset>
