@@ -2,10 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Categories on Moonlit Retreat</title>
-        <link>http://localhost:1313/en/categories/</link>
+        <link>https://libertydream.github.io/en/categories/</link>
         <description>Recent content in Categories on Moonlit Retreat</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <copyright>一轩明月</copyright><atom:link href="http://localhost:1313/en/categories/index.xml" rel="self" type="application/rss+xml" />
+        <copyright>一轩明月</copyright>
+        <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/en/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Syntax</title>
+        <link>https://libertydream.github.io/en/categories/syntax/</link>
+        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://libertydream.github.io/en/categories/syntax/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Themes</title>
+        <link>https://libertydream.github.io/en/categories/themes/</link>
+        <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://libertydream.github.io/en/categories/themes/</guid>
+        <description></description>
+        </item>
+        
     </channel>
 </rss>
