@@ -7,7 +7,383 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>一轩明月</copyright>
-        <lastBuildDate>Thu, 27 Feb 2025 16:33:15 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/en/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Mar 2025 12:01:39 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/en/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Suggested Math Notation for AI</title>
+        <link>https://libertydream.github.io/en/p/suggested-math-notation-for-ai/</link>
+        <pubDate>Sat, 01 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://libertydream.github.io/en/p/suggested-math-notation-for-ai/</guid>
+        <description>&lt;img src="https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/notation-protocol.jpeg" alt="Featured image of post Suggested Math Notation for AI" /&gt;&lt;p&gt;In recent years, the field of artificial intelligence has seen rapid development. Interactions between different researchers and research groups have become increasingly important. However, one issue is that the symbols used in papers from diverse sources are not standardized. This article therefore puts forward general recommendations for some commonly used mathematical symbols in the field of artificial intelligence.&lt;/p&gt;
+&lt;h2 id=&#34;dataset&#34;&gt;Dataset
+&lt;/h2&gt;&lt;p&gt;Dataset $S=\{ \mathbf{z}_i \}^n_{i=1}=\{(\mathbf{x}_i, \mathbf{y}_i) \}^n_{i=1}$ is sampled from a distribution $\mathcal{D}$ over a domain $\mathcal{Z} = \mathcal{X} \times \mathcal{Y}$.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\mathcal{X}$ is the instances domain (a set)&lt;/li&gt;
+&lt;li&gt;$\mathcal{Y}$ is the label domain (a set)&lt;/li&gt;
+&lt;li&gt;$\mathcal{Z}=\mathcal{X}\times\mathcal{Y}$ is the example domain (a set)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Usually, $\mathcal{X}$ is a subset of $\mathbb{R}^d$ and $\mathcal{Y}$ is a subset of $\mathbb{R}^{d_\text{o}}$, where $d$ is the input dimension, $d_\text{o}$ is the ouput dimension.&lt;/p&gt;
+&lt;p&gt;$n=$#$S$ is the number of samples. Wihout specification, $S$ and $n$ are for the training set.&lt;/p&gt;
+&lt;h2 id=&#34;function&#34;&gt;Function
+&lt;/h2&gt;&lt;p&gt;A hypothesis space is denoted by $\mathcal{H}$. A hypothesis function is denoted by $f_{\mathbf{\theta}}(\mathbf{x})\in\mathcal{H}$ or $f(\mathbf{x};\mathbf{\theta})$ with $f_{\mathbf{\theta}}:\mathcal{X}\to\mathcal{Y}$.&lt;/p&gt;
+&lt;p&gt;$\mathbf{\theta}$ denotes the set of parameters of $f_{\mathbf{\theta}}$.&lt;/p&gt;
+&lt;p&gt;If there exists a target function, it is denoted by $f^*$ or $f^*:\mathcal{X}\to\mathcal{Y}$ satisfying $\mathbf{y}_i=f^*(\mathbf{x}_i)$ for $i=1,\dots,n$.&lt;/p&gt;
+&lt;h2 id=&#34;loss-function&#34;&gt;Loss function
+&lt;/h2&gt;&lt;p&gt;A loss function, denoted by $\ell:\mathcal{H}\times\mathcal{Z}\to\mathbb{R}_{+}:=[0,+\infty)$ measures the difference between a predicted label and a true label, e.g.,&lt;/p&gt;
+&lt;p&gt;$L^2$ loss:&lt;/p&gt;
+$$
+\ell(f_{\mathbf{\theta}},\mathbf{z})=(f_{\mathbf{\theta}}(\mathbf{x})-\mathbf{y})^2
+$$&lt;p&gt;where $\mathbf{z}=(\mathbf{x},\mathbf{y})$. For convenience, $\ell(f_{\mathbf{\theta}},\mathbf{z})$ can also be written as&lt;/p&gt;
+$$
+\ell(f_{\mathbf{\theta}}(\mathbf{x}), \mathbf{y})
+$$&lt;p&gt;Training loss for a set $S=\{(\mathbf{x}_i,\mathbf{y}_i)\}^n_{i=1}$ is denoted by $L_S(\mathbf{\theta})$ or $L_n(\mathbf{\theta})$ or $R_S(\mathbf{\theta})$ or $R_n(\mathbf{\theta})$,&lt;/p&gt;
+$$
+L_S(\mathbf{\theta})=\frac{1}{n}\sum^n_{i=1}\ell(f_{\mathbf{\theta}}(\mathbf{x}_i),\mathbf{y}_i)
+$$&lt;p&gt;Expected loss is denoted by $L_{\mathcal{D}}$ or $R_{\mathcal{D}}$,&lt;/p&gt;
+$$
+L_{\mathcal{D}}(\mathbf{\theta})=\mathbb{E}_{\mathcal{D}}\ell(f_{\mathbf{\theta}}(\mathbf{x}),\mathbf{y})
+$$&lt;p&gt;where $\mathbf{z}=(\mathbf{x},\mathbf{y})$ follows the distribution $\mathcal{D}$.&lt;/p&gt;
+&lt;h2 id=&#34;activation-function&#34;&gt;Activation function
+&lt;/h2&gt;&lt;p&gt;An activation function is denoted by $\sigma(x)$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example 1&lt;/strong&gt;. Some commonly used activation functions are&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\sigma(x)=\text{ReLU}(x)=\text{max}(0,x)$&lt;/li&gt;
+&lt;li&gt;$\sigma(x)=\text{sigmoid}(x)=\dfrac{1}{1+e^{-x}}$&lt;/li&gt;
+&lt;li&gt;$\sigma(x)=\tanh(x)$&lt;/li&gt;
+&lt;li&gt;$\sigma(x)=\cos x, \sin x$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;two-layer-neural-network&#34;&gt;Two-layer neural network
+&lt;/h2&gt;&lt;p&gt;The neuron number of the hidden layer is denoted by $m$, The two-layer neural network is&lt;/p&gt;
+$$
+  f_{\mathbf{\theta}}(\mathbf{x})=\sum^m_{j=1}a_j\sigma(\mathbf{w}_j\cdot\mathbf{x}+b_j)
+$$&lt;p&gt;where $\sigma$ is the activation function, $\mathbf{w}_j$ is the input weight, $a_j$ is the output weight, $b_j$ is the bias term. We denote the set of parameters by&lt;/p&gt;
+$$
+  \mathbf{\theta}=(a_1,\ldots,a_m,\mathbf{w}_1,\ldots,\mathbf{w}_m,b_1,\cdots,b_m)
+$$&lt;h2 id=&#34;general-deep-neural-network&#34;&gt;General deep neural network
+&lt;/h2&gt;&lt;p&gt;The counting of the layer number excludes the input layer. An $L$-layer neural network is denoted by&lt;/p&gt;
+$$
+  f_{\mathbf{\theta}}(\mathbf{x})=\mathbf{W}^{[L-1]}\sigma\circ(\mathbf{W}^{[L-2]}\sigma\circ(\cdots(\mathbf{W}^{[1]}\sigma\circ(\mathbf{W}^{[0]}\mathbf{x}+\mathbf{b}^{[0]})+\mathbf{b}^{[1]})\cdots)+\mathbf{b}^{[L-2]})+\mathbf{b}^{[L-1]}
+$$&lt;p&gt;where $\mathbf{W}^{[l]}\in\mathbb{R}^{m_{l+1}\times m_l}$, $\mathbf{b}^{[l]}=\mathbb{R}^{m_{l+1}}$, $m_0=d_\text{in}=d$, $m_{L}=d_\text{o}$, $\sigma$ is a scalar function and &amp;ldquo;$\circ$&amp;rdquo; means entry-wise operation. We denote the set of parameters by&lt;/p&gt;
+$$
+  \mathbf{\theta}=(\mathbf{W}^{[0]},\mathbf{W}^{[1]},\dots,\mathbf{W}^{[L-1]},\mathbf{b}^{[0]},\mathbf{b}^{[1]},\dots,\mathbf{b}^{[L-1]})
+$$&lt;p&gt;This can also be defined recursively,&lt;/p&gt;
+$$
+  f^{[0]}_{\mathbf{\theta}}(\mathbf{x})=\mathbf{x},
+$$$$
+  f^{[l]}_{\mathbf{\theta}}(\mathbf{x})=\sigma\circ(\mathbf{W}^{[l-1]}f^{[l-1]}_{\mathbf{\theta}}(\mathbf{x})+\mathbf{b}^{[l-1]}) \quad 1\le l\le L-1
+$$$$
+  f_{\mathbf{\theta}}(\mathbf{x})=f^{[L]}_{\mathbf{\theta}}(\mathbf{x})=\mathbf{W}^{[L-1]}f^{[L-1]}_{\mathbf{\theta}}(\mathbf{x})+\mathbf{b}^{[L-1]}
+$$&lt;h2 id=&#34;complexity&#34;&gt;Complexity
+&lt;/h2&gt;&lt;p&gt;The VC-dimension of a hypothesis class $\mathcal{H}$ is denoted as VCdim($\mathcal{H}$).&lt;/p&gt;
+&lt;p&gt;The Rademacher complexity of a hypothesis space $\mathcal{H}$ on a sample set $S$ is denoted by $R(\mathcal{H}\circ S)$ or $\text{Rad}_S(\mathcal{H})$. The complexity $\text{Rad}_S(\mathcal{H})$ is random because of the randomness of $S$. The expectation of the empirical Rademacher complexity over all samples of size $n$ is denoted by&lt;/p&gt;
+$$
+  \text{Rad}_n(\mathcal{H}) = \mathbb{E}_S\text{Rad}_S(\mathcal{H})
+$$&lt;h2 id=&#34;training&#34;&gt;Training
+&lt;/h2&gt;&lt;p&gt;The Gradient Descent is oftern denoted by GD. THe Stochastic Gradient Descent is often denoted by SGD.&lt;/p&gt;
+&lt;p&gt;A batch set is denoted by $B$ and the batch size is denoted by $|B|$.&lt;/p&gt;
+&lt;p&gt;The learning rate is denoted by $\eta$.&lt;/p&gt;
+&lt;h2 id=&#34;fourier-frequency&#34;&gt;Fourier Frequency
+&lt;/h2&gt;&lt;p&gt;The discretized frequency is denoted by $\mathbf{k}$, and the continuous frequency is denoted by $\mathbf{\xi}$.&lt;/p&gt;
+&lt;h2 id=&#34;convolution&#34;&gt;Convolution
+&lt;/h2&gt;&lt;p&gt;The convolution operation is denoted by $*$.&lt;/p&gt;
+&lt;h2 id=&#34;notation-table&#34;&gt;Notation table
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;symbol&lt;/th&gt;
+          &lt;th&gt;meaning&lt;/th&gt;
+          &lt;th&gt;Latex&lt;/th&gt;
+          &lt;th&gt;simplied&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{x}$&lt;/td&gt;
+          &lt;td&gt;input&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{x}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vx&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{y}$&lt;/td&gt;
+          &lt;td&gt;output, label&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{y}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vy&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$d$&lt;/td&gt;
+          &lt;td&gt;input dimension&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;d&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$d_{\text{o}}$&lt;/td&gt;
+          &lt;td&gt;output dimension&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;d_{\rm o}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$n$&lt;/td&gt;
+          &lt;td&gt;number of samples&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;n&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{X}$&lt;/td&gt;
+          &lt;td&gt;instances domain (a set)&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{X}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fX&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{Y}$&lt;/td&gt;
+          &lt;td&gt;labels domain (a set)&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{Y}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fY&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{Z}$&lt;/td&gt;
+          &lt;td&gt;$=\mathcal{X}\times\mathcal{Y}$ example domain&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{Z}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fZ&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{H}$&lt;/td&gt;
+          &lt;td&gt;hypothesis space (a set)&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{H}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fH&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{\theta}$&lt;/td&gt;
+          &lt;td&gt;a set of parameters&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{\theta}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vtheta&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}: \mathcal{X}\to\mathcal{Y}$&lt;/td&gt;
+          &lt;td&gt;hypothesis function&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\f_{\bm{\theta}}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;f_{\vtheta}&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f$ or $f^*: \mathcal{X}\to\mathcal{Y}$&lt;/td&gt;
+          &lt;td&gt;target function&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;f, f^*&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\ell:\mathcal{H}\times \mathcal{Z}\to \mathbb{R}^+$&lt;/td&gt;
+          &lt;td&gt;loss function&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\ell&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{D}$&lt;/td&gt;
+          &lt;td&gt;distribution of $\mathcal{Z}$&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{D}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fD&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$$S=\{\mathbf{z}_i\}_{i=1}^n$$&lt;/td&gt;
+          &lt;td&gt;$$=\{(\mathbf{x}_i,\mathbf{y}_i)\}_{i=1}^n$$ sample set&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$L_S(\mathbf{\theta})$, $L_{n}(\mathbf{\theta})$, $R_n(\mathbf{\theta})$, $R_S(\mathbf{\theta})$&lt;/td&gt;
+          &lt;td&gt;empirical risk or training loss&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$L_D(\mathbf{\theta})$&lt;/td&gt;
+          &lt;td&gt;population risk or expected loss&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\sigma:\mathbb{R}\to\mathbb{R}$&lt;/td&gt;
+          &lt;td&gt;activation function&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\sigma&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{w}_j$&lt;/td&gt;
+          &lt;td&gt;input weight&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{w}_j&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vw_j&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$a_j$&lt;/td&gt;
+          &lt;td&gt;output weight&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;a_j&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$b_j$&lt;/td&gt;
+          &lt;td&gt;bias term&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;b_j&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}(\mathbf{x})$ or $f(\mathbf{x};\mathbf{\theta})$&lt;/td&gt;
+          &lt;td&gt;neural network&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;f_{\bm{\theta}}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;f_{\vtheta}&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\sum_{j=1}^{m} a_j \sigma (\mathbf{w}_j\cdot \mathbf{x} + b_j)$&lt;/td&gt;
+          &lt;td&gt;two-layer neural network&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\text{VCdim}(\mathcal{H}$)&lt;/td&gt;
+          &lt;td&gt;VC-dimension of $\mathcal{H}$&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\text{Rad}(\mathcal{H}\circ S)$, $\text{Rad}_{S}(\mathcal{H})$&lt;/td&gt;
+          &lt;td&gt;Rademacher complexity of $\mathcal{H}$ on $S$&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;${\rm Rad}_{n} (\mathcal{H})$&lt;/td&gt;
+          &lt;td&gt;Rademacher complexity over samples of size $n$&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\text{GD}$&lt;/td&gt;
+          &lt;td&gt;gradient descent&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\text{SGD}$&lt;/td&gt;
+          &lt;td&gt;stochastic gradient descent&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$B$&lt;/td&gt;
+          &lt;td&gt;a batch set&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;B&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\vert B\vert$&lt;/td&gt;
+          &lt;td&gt;batch size&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;b&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\eta$&lt;/td&gt;
+          &lt;td&gt;learning rate&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\eta&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{k}$&lt;/td&gt;
+          &lt;td&gt;discretized frequency&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{k}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vk&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{\xi}$&lt;/td&gt;
+          &lt;td&gt;continuous frequency&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{\xi}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vxi&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$*$&lt;/td&gt;
+          &lt;td&gt;convolution operation&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;*&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;l-layer-neural-network&#34;&gt;L-layer neural network
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;symbol&lt;/th&gt;
+          &lt;th&gt;meaning&lt;/th&gt;
+          &lt;th&gt;Latex&lt;/th&gt;
+          &lt;th&gt;simplied&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$d$&lt;/td&gt;
+          &lt;td&gt;input dimension&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;d&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$d_{\text{o}}$&lt;/td&gt;
+          &lt;td&gt;output dimension&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;d_{\rm o}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$m_l$&lt;/td&gt;
+          &lt;td&gt;the number of $l$-th layer neuron, $m_0=d$, $m_{L} = d_{\text{o}}$&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;m_l&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{W}^{[l]}$&lt;/td&gt;
+          &lt;td&gt;the $l$-th layer weight&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{W}^{[l]}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mW^{[l]}&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{b}^{[l]}$&lt;/td&gt;
+          &lt;td&gt;the $l$-th layer bias term&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{b}^{[l]}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vb^{[l]}&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\circ$&lt;/td&gt;
+          &lt;td&gt;entry-wise operation&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\circ&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\sigma:\mathbb{R}\to\mathbb{R}^+$&lt;/td&gt;
+          &lt;td&gt;activation function&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\sigma&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{\theta}$&lt;/td&gt;
+          &lt;td&gt;$=(\mathbf{W}^{[0]},\ldots,\mathbf{W}^{[L-1]},\mathbf{b}^{[0]},\ldots,\mathbf{b}^{[L-1]})$, parameters&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{\theta}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vtheta&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}^{[0]}(\mathbf{x})$&lt;/td&gt;
+          &lt;td&gt;$=\mathbf{x}$&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}^{[l]}(\mathbf{x})$&lt;/td&gt;
+          &lt;td&gt;$=\sigma\circ(\mathbf{W}^{[l-1]} f_{\mathbf{\theta}}^{[l-1]}(\mathbf{x}) + \mathbf{b}^{[l-1]})$, $l$-th layer output&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}(\mathbf{x})$&lt;/td&gt;
+          &lt;td&gt;$=f_{\mathbf{\theta}}^{[L]}(\mathbf{x})=\mathbf{W}^{[L-1]} f_{\mathbf{\theta}}^{[L-1]}(\mathbf{x}) + \mathbf{b}^{[L-1]}$, $L$-layer NN&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
         <title>Markdown Syntax Guide</title>
         <link>https://libertydream.github.io/en/p/markdown-syntax-guide/</link>
         <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
@@ -241,7 +617,7 @@
         <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>https://libertydream.github.io/en/p/math-typesetting/</guid>
-        <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
+        <description>&lt;img src="https://libertydream.github.io/p/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8E%92%E7%89%88/math-typesetting.jpeg" alt="Featured image of post Math Typesetting" /&gt;&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
 &lt;p&gt;In this example we will be using &lt;a class=&#34;link&#34; href=&#34;https://katex.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;KaTeX&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;steps&#34;&gt;Steps
@@ -275,16 +651,6 @@
 $$
  \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } 
 $$</description>
-        </item>
-        <item>
-        <title>Demo_chap</title>
-        <link>https://libertydream.github.io/en/p/demo_chap/</link>
-        <pubDate>Thu, 27 Feb 2025 00:30:58 +0800</pubDate>
-        
-        <guid>https://libertydream.github.io/en/p/demo_chap/</guid>
-        <description>&lt;h2 id=&#34;title&#34;&gt;Title
-&lt;/h2&gt;&lt;p&gt;Hello world&lt;/p&gt;
-</description>
         </item>
         
     </channel>

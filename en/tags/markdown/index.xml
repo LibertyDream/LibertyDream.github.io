@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>一轩明月</copyright>
-        <lastBuildDate>Thu, 27 Feb 2025 16:33:15 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/en/tags/markdown/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Mar 2025 12:01:39 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/en/tags/markdown/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Markdown Syntax Guide</title>
         <link>https://libertydream.github.io/en/p/markdown-syntax-guide/</link>
         <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
@@ -241,7 +241,7 @@
         <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>https://libertydream.github.io/en/p/math-typesetting/</guid>
-        <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
+        <description>&lt;img src="https://libertydream.github.io/p/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8E%92%E7%89%88/math-typesetting.jpeg" alt="Featured image of post Math Typesetting" /&gt;&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
 &lt;p&gt;In this example we will be using &lt;a class=&#34;link&#34; href=&#34;https://katex.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;KaTeX&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;steps&#34;&gt;Steps

@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>一轩明月</copyright>
-        <lastBuildDate>Thu, 27 Feb 2025 16:33:15 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/tags/%E8%AF%AD%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Mar 2025 12:01:39 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/tags/%E8%AF%AD%E6%B3%95/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>博客 Markdown 语法简介</title>
         <link>https://libertydream.github.io/p/%E5%8D%9A%E5%AE%A2-markdown-%E8%AF%AD%E6%B3%95%E7%AE%80%E4%BB%8B/</link>
         <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
@@ -241,7 +241,7 @@
         <pubDate>Tue, 25 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>https://libertydream.github.io/p/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8E%92%E7%89%88/</guid>
-        <description>&lt;p&gt;在 Hugo 项目中，您可以通过使用第三方 JavaScript 库来启用数学符号的排版。&lt;/p&gt;
+        <description>&lt;img src="https://libertydream.github.io/p/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%8E%92%E7%89%88/math-typesetting.jpeg" alt="Featured image of post 数学公式排版" /&gt;&lt;p&gt;在 Hugo 项目中，您可以通过使用第三方 JavaScript 库来启用数学符号的排版。&lt;/p&gt;
 &lt;p&gt;在这个例子中，我们将使用 &lt;a class=&#34;link&#34; href=&#34;https://katex.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;KaTeX&lt;/a&gt; 来排版数学公式。&lt;/p&gt;
 &lt;h2 id=&#34;步骤&#34;&gt;步骤

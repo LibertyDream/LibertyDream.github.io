@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>规范 on 一轩明月</title>
+        <link>https://libertydream.github.io/tags/%E8%A7%84%E8%8C%83/</link>
+        <description>Recent content in 规范 on 一轩明月</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>一轩明月</copyright>
+        <lastBuildDate>Sat, 01 Mar 2025 12:01:39 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/tags/%E8%A7%84%E8%8C%83/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>建议使用的人工智能数学符号</title>
+        <link>https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</link>
+        <pubDate>Sat, 01 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</guid>
+        <description>&lt;img src="https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/notation-protocol.jpeg" alt="Featured image of post 建议使用的人工智能数学符号" /&gt;&lt;p&gt;近年来，人工智能领域发展迅速。不同研究人员和研究小组之间的交流变得越来越重要。然而一个问题在于，出处不同的论文中符号使用并不统一。由此，本文对人工智能领域常用的一些数学符号提出了一般性的建议。&lt;/p&gt;
+&lt;h2 id=&#34;数据集&#34;&gt;数据集
+&lt;/h2&gt;&lt;p&gt;数据集 $S=\{ \mathbf{z}_i \}^n_{i=1}=\{(\mathbf{x}_i, \mathbf{y}_i) \}^n_{i=1}$ 从分布 $\mathcal{D}$ 中采样，定义在域 $\mathcal{Z} = \mathcal{X} \times \mathcal{Y}$ 上。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\mathcal{X}$ 是实例域（一个集合）&lt;/li&gt;
+&lt;li&gt;$\mathcal{Y}$ 是标签域（一个集合）&lt;/li&gt;
+&lt;li&gt;$\mathcal{Z}=\mathcal{X}\times\mathcal{Y}$ 是样本域（一个集合）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通常，$\mathcal{X}$ 是 $\mathbb{R}^d$ 的子集，$\mathcal{Y}$ 是 $\mathbb{R}^{d_\text{o}}$ 的子集，其中 $d$ 是输入维度，$d_\text{o}$ 是输出维度。&lt;br&gt;
+$n=$#$S$ 表示样本数量。在没有特别说明的情况下，$S$ 和 $n$ 表示训练集。&lt;/p&gt;
+&lt;h2 id=&#34;函数&#34;&gt;函数
+&lt;/h2&gt;&lt;p&gt;假设空间用 $\mathcal{H}$ 表示，函数用 $f_{\mathbf{\theta}}(\mathbf{x})\in\mathcal{H}$ 或 $f(\mathbf{x};\mathbf{\theta})$ 表示，其中 $f_{\mathbf{\theta}}:\mathcal{X}\to\mathcal{Y}$。&lt;/p&gt;
+&lt;p&gt;$\mathbf{\theta}$ 表示函数 $f_{\mathbf{\theta}}$ 的参数集。&lt;/p&gt;
+&lt;p&gt;如果存在目标函数，则用 $f^*$ 或 $f^*:\mathcal{X}\to\mathcal{Y}$ 表示，同时满足 $\mathbf{y}_i=f^*(\mathbf{x}_i)$ ， $i=1,\dots,n$。&lt;/p&gt;
+&lt;h2 id=&#34;损失函数&#34;&gt;损失函数
+&lt;/h2&gt;&lt;p&gt;损失函数用 $\ell:\mathcal{H}\times\mathcal{Z}\to\mathbb{R}_{+}:=[0,+\infty)$ 表示，用来衡量预测值和实际值之间的差异，例如 $L^2$ 损失：&lt;/p&gt;
+$$
+\ell(f_{\mathbf{\theta}},\mathbf{z})= \frac{1}{2}(f_{\mathbf{\theta}}(\mathbf{x})-\mathbf{y})^2
+$$&lt;p&gt;其中 $\mathbf{z}=(\mathbf{x},\mathbf{y})$。为了方便，$\ell(f_{\mathbf{\theta}},\mathbf{z})$ 也可以写作：&lt;/p&gt;
+$$
+\ell(f_{\mathbf{\theta}}(\mathbf{x}), \mathbf{y})
+$$&lt;p&gt;对于样本集 $S=\{(\mathbf{x}_i,\mathbf{y}_i)\}^n_{i=1}$，训练损失用 $L_S(\mathbf{\theta})$ 或 $L_n(\mathbf{\theta})$ 或 $R_S(\mathbf{\theta})$ 或 $R_n(\mathbf{\theta})$ 表示：&lt;/p&gt;
+$$
+L_S(\mathbf{\theta})=\frac{1}{n}\sum^n_{i=1}\ell(f_{\mathbf{\theta}}(\mathbf{x}_i),\mathbf{y}_i)
+$$&lt;p&gt;期望损失用 $L_{\mathcal{D}}$ 或 $R_{\mathcal{D}}$ 表示：&lt;/p&gt;
+$$
+L_{\mathcal{D}}(\mathbf{\theta})=\mathbb{E}_{\mathcal{D}}\ell(f_{\mathbf{\theta}}(\mathbf{x}),\mathbf{y})
+$$&lt;p&gt;其中 $\mathbf{z}=(\mathbf{x},\mathbf{y})$ 服从分布 $\mathcal{D}$。&lt;/p&gt;
+&lt;h2 id=&#34;激活函数&#34;&gt;激活函数
+&lt;/h2&gt;&lt;p&gt;激活函数用 $\sigma(x)$ 表示。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;，常用的激活函数有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$\sigma(x)=\text{ReLU}(x)=\text{max}(0,x)$&lt;/li&gt;
+&lt;li&gt;$\sigma(x)=\text{sigmoid}(x)=\dfrac{1}{1+e^{-x}}$&lt;/li&gt;
+&lt;li&gt;$\sigma(x)=\tanh(x)$&lt;/li&gt;
+&lt;li&gt;$\sigma(x)=\cos x, \sin x$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;双层神经网络&#34;&gt;双层神经网络
+&lt;/h2&gt;&lt;p&gt;隐藏层的神经元数量用 $m$ 表示，双层神经网络为：&lt;/p&gt;
+$$
+  f_{\mathbf{\theta}}(\mathbf{x})=\sum^m_{j=1}a_j\sigma(\mathbf{w}_j\cdot\mathbf{x}+b_j)
+$$&lt;p&gt;其中 $\sigma$ 是激活函数，$\mathbf{w}_j$ 是输入权重，$a_j$ 是输出权重，$b_j$ 是偏置项。&lt;br&gt;
+表示参数集用&lt;/p&gt;
+$$
+ \mathbf{\theta}=(a_1,\ldots,a_m,\mathbf{w}_1,\ldots,\mathbf{w}_m,b_1,\cdots,b_m)
+$$&lt;h2 id=&#34;通用深度神经网络&#34;&gt;通用深度神经网络
+&lt;/h2&gt;&lt;p&gt;计算层数时不包括输入层。一个 $L$-层神经网络表示为：&lt;/p&gt;
+$$
+  f_{\mathbf{\theta}}(\mathbf{x})=\mathbf{W}^{[L-1]}\sigma\circ(\mathbf{W}^{[L-2]}\sigma\circ(\cdots(\mathbf{W}^{[1]}\sigma\circ(\mathbf{W}^{[0]}\mathbf{x}+\mathbf{b}^{[0]})+\mathbf{b}^{[1]})\cdots)+\mathbf{b}^{[L-2]})+\mathbf{b}^{[L-1]}
+$$&lt;p&gt;其中 $\mathbf{W}^{[l]}\in\mathbb{R}^{m_{l+1}\times m_l}$，$\mathbf{b}^{[l]}=\mathbb{R}^{m_{l+1}}$，$m_0=d_\text{in}=d$，$m_{L}=d_\text{o}$，$\sigma$ 是标量函数，&amp;quot;$\circ$&amp;quot; 表示逐元素操作。表示参数集用&lt;/p&gt;
+$$
+ \mathbf{\theta}=(\mathbf{W}^{[0]},\mathbf{W}^{[1]},\dots,\mathbf{W}^{[L-1]},\mathbf{b}^{[0]},\mathbf{b}^{[1]},\dots,\mathbf{b}^{[L-1]})
+$$&lt;p&gt;$\mathbf{W}^{[l]}$ 的某个元素用 $\mathbf{W}^{[l]}_{ij}$ 表示。这个定义也可以递归完成：&lt;/p&gt;
+$$
+  f^{[0]}_{\mathbf{\theta}}(\mathbf{x})=\mathbf{x}
+$$$$
+  f^{[l]}_{\mathbf{\theta}}(\mathbf{x})=\sigma\circ(\mathbf{W}^{[l-1]}f^{[l-1]}_{\mathbf{\theta}}(\mathbf{x})+\mathbf{b}^{[l-1]}) \quad 1\le l\le L-1
+$$$$
+  f_{\mathbf{\theta}}(\mathbf{x})=f^{[L]}_{\mathbf{\theta}}(\mathbf{x})=\mathbf{W}^{[L-1]}f^{[L-1]}_{\mathbf{\theta}}(\mathbf{x})+\mathbf{b}^{[L-1]}
+$$&lt;h2 id=&#34;复杂度&#34;&gt;复杂度
+&lt;/h2&gt;&lt;p&gt;假定类 $\mathcal{H}$ 的 VC 维度用 VCdim($\mathcal{H}$) 表示。&lt;/p&gt;
+&lt;p&gt;假定空间 $\mathcal{H}$ 在样本集 $S$ 上的 Rademacher 复杂度用 $R(\mathcal{H}\circ S)$ 或 $\text{Rad}_S(\mathcal{H})$ 表示。&lt;/p&gt;
+&lt;p&gt;复杂度 $\text{Rad}_S(\mathcal{H})$ 是随机的，因为 $S$ 是随机的。对所有大小为 $n$ 的样本的经验 Rademacher 复杂度，其期望为&lt;/p&gt;
+$$
+  \text{Rad}_n(\mathcal{H}) = \mathbb{E}_S\text{Rad}_S(\mathcal{H})
+$$&lt;h2 id=&#34;训练&#34;&gt;训练
+&lt;/h2&gt;&lt;p&gt;梯度下降通常用 $\text{GD}$ 表示，随机梯度下降通常用 $\text{SGD}$ 表示。&lt;/p&gt;
+&lt;p&gt;一批数据用 $B$ 表示，批量大小用 $|B|$ 表示。学习率用 $\eta$ 表示。&lt;/p&gt;
+&lt;h2 id=&#34;傅里叶频率&#34;&gt;傅里叶频率
+&lt;/h2&gt;&lt;p&gt;离散频率用 $\mathbf{k}$ 表示，连续频率用 $\mathbf{\xi}$ 表示。&lt;/p&gt;
+&lt;h2 id=&#34;卷积&#34;&gt;卷积
+&lt;/h2&gt;&lt;p&gt;卷积运算用 $*$ 表示。&lt;/p&gt;
+&lt;h2 id=&#34;符号表&#34;&gt;符号表
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;符号&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+          &lt;th&gt;Latex&lt;/th&gt;
+          &lt;th&gt;简记&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{x}$&lt;/td&gt;
+          &lt;td&gt;输入&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{x}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vx&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{y}$&lt;/td&gt;
+          &lt;td&gt;输出，标签&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{y}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vy&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$d$&lt;/td&gt;
+          &lt;td&gt;输入维度&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;d&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$d_{\text{o}}$&lt;/td&gt;
+          &lt;td&gt;输出维度&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;d_{\rm o}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$n$&lt;/td&gt;
+          &lt;td&gt;样本量&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;n&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{X}$&lt;/td&gt;
+          &lt;td&gt;实例域（一个集合）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{X}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fX&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{Y}$&lt;/td&gt;
+          &lt;td&gt;标签域（一个集合）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{Y}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fY&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{Z}$&lt;/td&gt;
+          &lt;td&gt;$=\mathcal{X}\times\mathcal{Y}$ 样本域&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{Z}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fZ&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{H}$&lt;/td&gt;
+          &lt;td&gt;假设空间（一个集合）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{H}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fH&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{\theta}$&lt;/td&gt;
+          &lt;td&gt;参数集&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{\theta}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vtheta&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}: \mathcal{X}\to\mathcal{Y}$&lt;/td&gt;
+          &lt;td&gt;假设函数&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\f_{\bm{\theta}}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;f_{\vtheta}&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f$ or $f^*: \mathcal{X}\to\mathcal{Y}$&lt;/td&gt;
+          &lt;td&gt;目标函数&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;f, f^*&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\ell:\mathcal{H}\times \mathcal{Z}\to \mathbb{R}^+$&lt;/td&gt;
+          &lt;td&gt;损失函数&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\ell&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathcal{D}$&lt;/td&gt;
+          &lt;td&gt;$\mathcal{Z}$ 的分布&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mathcal{D}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\fD&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$$S=\{\mathbf{z}_i\}_{i=1}^n$$&lt;/td&gt;
+          &lt;td&gt;$$=\{(\mathbf{x}_i,\mathbf{y}_i)\}_{i=1}^n$$ 样本集&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$L_S(\mathbf{\theta})$, $L_{n}(\mathbf{\theta})$, $R_n(\mathbf{\theta})$, $R_S(\mathbf{\theta})$&lt;/td&gt;
+          &lt;td&gt;经验误差或训练损失&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$L_D(\mathbf{\theta})$&lt;/td&gt;
+          &lt;td&gt;泛化误差或期望损失&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\sigma:\mathbb{R}\to\mathbb{R}$&lt;/td&gt;
+          &lt;td&gt;激活函数&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\sigma&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{w}_j$&lt;/td&gt;
+          &lt;td&gt;输入权重&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{w}_j&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vw_j&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$a_j$&lt;/td&gt;
+          &lt;td&gt;输出权重&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;a_j&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$b_j$&lt;/td&gt;
+          &lt;td&gt;偏置项&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;b_j&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}(\mathbf{x})$ or $f(\mathbf{x};\mathbf{\theta})$&lt;/td&gt;
+          &lt;td&gt;神经网络&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;f_{\bm{\theta}}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;f_{\vtheta}&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\sum_{j=1}^{m} a_j \sigma (\mathbf{w}_j\cdot \mathbf{x} + b_j)$&lt;/td&gt;
+          &lt;td&gt;双层神经网络&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\text{VCdim}(\mathcal{H}$)&lt;/td&gt;
+          &lt;td&gt;$\mathcal{H}$ 的 VC 维度&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\text{Rad}(\mathcal{H}\circ S)$, $\text{Rad}_{S}(\mathcal{H})$&lt;/td&gt;
+          &lt;td&gt;$\mathcal{H}$ 在 $S$ 上的 Rademacher 复杂度&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;${\rm Rad}_{n} (\mathcal{H})$&lt;/td&gt;
+          &lt;td&gt;$n$ 个样本的 Rademacher 复杂度&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\text{GD}$&lt;/td&gt;
+          &lt;td&gt;梯度下降&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\text{SGD}$&lt;/td&gt;
+          &lt;td&gt;随机梯度下降&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$B$&lt;/td&gt;
+          &lt;td&gt;一批数据（一个集合）&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;B&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\vert B\vert$&lt;/td&gt;
+          &lt;td&gt;批量大小&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;b&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\eta$&lt;/td&gt;
+          &lt;td&gt;学习率&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\eta&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{k}$&lt;/td&gt;
+          &lt;td&gt;离散频率&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{k}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vk&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{\xi}$&lt;/td&gt;
+          &lt;td&gt;连续频率&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{\xi}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vxi&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$*$&lt;/td&gt;
+          &lt;td&gt;卷积运算&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;*&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;l-层神经网络&#34;&gt;L 层神经网络
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;符号&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+          &lt;th&gt;Latex&lt;/th&gt;
+          &lt;th&gt;简记&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$d$&lt;/td&gt;
+          &lt;td&gt;输入维度&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;d&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$d_{\text{o}}$&lt;/td&gt;
+          &lt;td&gt;输出维度&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;d_{\rm o}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$m_l$&lt;/td&gt;
+          &lt;td&gt;第 $l$ 层神经元数量, $m_0=d$, $m_{L} = d_{\text{o}}$&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;m_l&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{W}^{[l]}$&lt;/td&gt;
+          &lt;td&gt;第 $l$ 层权重&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{W}^{[l]}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\mW^{[l]}&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{b}^{[l]}$&lt;/td&gt;
+          &lt;td&gt;第 $l$ 层偏置项&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{b}^{[l]}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vb^{[l]}&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\circ$&lt;/td&gt;
+          &lt;td&gt;逐项计算&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\circ&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\sigma:\mathbb{R}\to\mathbb{R}^+$&lt;/td&gt;
+          &lt;td&gt;激活函数&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\sigma&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\mathbf{\theta}$&lt;/td&gt;
+          &lt;td&gt;$=(\mathbf{W}^{[0]},\ldots,\mathbf{W}^{[L-1]},\mathbf{b}^{[0]},\ldots,\mathbf{b}^{[L-1]})$, 参数&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\bm{\theta}&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;\vtheta&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}^{[0]}(\mathbf{x})$&lt;/td&gt;
+          &lt;td&gt;$=\mathbf{x}$&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}^{[l]}(\mathbf{x})$&lt;/td&gt;
+          &lt;td&gt;$=\sigma\circ(\mathbf{W}^{[l-1]} f_{\mathbf{\theta}}^{[l-1]}(\mathbf{x}) + \mathbf{b}^{[l-1]})$, 第 $l$ 层输出&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$f_{\mathbf{\theta}}(\mathbf{x})$&lt;/td&gt;
+          &lt;td&gt;$=f_{\mathbf{\theta}}^{[L]}(\mathbf{x})=\mathbf{W}^{[L-1]} f_{\mathbf{\theta}}^{[L-1]}(\mathbf{x}) + \mathbf{b}^{[L-1]}$, $L$ 层神经网络&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
