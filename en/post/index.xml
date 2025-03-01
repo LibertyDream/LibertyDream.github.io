@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>一轩明月</copyright>
-        <lastBuildDate>Sat, 01 Mar 2025 12:01:39 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/en/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 01 Mar 2025 17:59:00 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/en/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Suggested Math Notation for AI</title>
         <link>https://libertydream.github.io/en/p/suggested-math-notation-for-ai/</link>
         <pubDate>Sat, 01 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://libertydream.github.io/en/p/suggested-math-notation-for-ai/</guid>
-        <description>&lt;img src="https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/notation-protocol.jpeg" alt="Featured image of post Suggested Math Notation for AI" /&gt;&lt;p&gt;In recent years, the field of artificial intelligence has seen rapid development. Interactions between different researchers and research groups have become increasingly important. However, one issue is that the symbols used in papers from diverse sources are not standardized. This article therefore puts forward general recommendations for some commonly used mathematical symbols in the field of artificial intelligence.&lt;/p&gt;
+        <description>&lt;img src="https://libertydream.github.io/p/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/notation-protocol.jpeg" alt="Featured image of post Suggested Math Notation for AI" /&gt;&lt;p&gt;In recent years, the field of artificial intelligence has seen rapid development. Interactions between different researchers and research groups have become increasingly important. However, one issue is that the symbols used in papers from diverse sources are not standardized. This article therefore puts forward general recommendations for some commonly used mathematical symbols in the field of artificial intelligence.&lt;/p&gt;
 &lt;h2 id=&#34;dataset&#34;&gt;Dataset
 &lt;/h2&gt;&lt;p&gt;Dataset $S=\{ \mathbf{z}_i \}^n_{i=1}=\{(\mathbf{x}_i, \mathbf{y}_i) \}^n_{i=1}$ is sampled from a distribution $\mathcal{D}$ over a domain $\mathcal{Z} = \mathcal{X} \times \mathcal{Y}$.&lt;/p&gt;
 &lt;ul&gt;

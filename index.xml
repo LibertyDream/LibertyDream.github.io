@@ -7,12 +7,66 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>一轩明月</copyright><atom:link href="https://libertydream.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>建议使用的人工智能数学符号</title>
-        <link>https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</link>
+        <title>关于</title>
+        <link>https://libertydream.github.io/%E5%85%B3%E4%BA%8E/</link>
         <pubDate>Sat, 01 Mar 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</guid>
-        <description>&lt;img src="https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/notation-protocol.jpeg" alt="Featured image of post 建议使用的人工智能数学符号" /&gt;&lt;p&gt;近年来，人工智能领域发展迅速。不同研究人员和研究小组之间的交流变得越来越重要。然而一个问题在于，出处不同的论文中符号使用并不统一。由此，本文对人工智能领域常用的一些数学符号提出了一般性的建议。&lt;/p&gt;
+        <guid>https://libertydream.github.io/%E5%85%B3%E4%BA%8E/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;不折不扣地准确陈述，是对写作的唯一道德要求。  ——埃兹拉·庞德&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;说说博客&#34;&gt;说说博客
+&lt;/h2&gt;&lt;p&gt;博客内容大致包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;人工智能理论、推导、实现和应用
+&lt;ul&gt;
+&lt;li&gt;机器（统计）学习，深度学习，强化学习……&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;MLOps，DevOps，prompt，RAG……&lt;/li&gt;
+&lt;li&gt;编程的趣味&lt;/li&gt;
+&lt;li&gt;技术写作技巧、规范和感悟&lt;/li&gt;
+&lt;li&gt;概念剖析，课题讲解&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;为什么写？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;把写作当做方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;interesting_challenges&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;explain_simply&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;master&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;review_and_practice&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;问点好问题，每天进步 &lt;code&gt;1 . .&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;说说我&#34;&gt;说说我
+&lt;/h2&gt;&lt;p&gt;算法工程师，NLP、推荐方向，暂居北京。&lt;/p&gt;
+&lt;p&gt;日常抱有偏见：编程是门手艺，工程师是狠角色，自动化是职业幸福之源，广度往往是深度的副产物……&lt;/p&gt;
+&lt;p&gt;艺不够绝、狠不起来、深未见底……撇撇嘴，码码字。可以来这里找我：&lt;/p&gt;
+&lt;p&gt;👉🏻&lt;a class=&#34;link&#34; href=&#34;https://x.com/DanielMeng12&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;X&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;👉🏻&lt;a class=&#34;link&#34; href=&#34;mailto:mfx660@gmail.com&#34; &gt;Email&lt;/a&gt;&lt;/p&gt;
+&lt;img src=&#34;wechat-connect.png&#34; width=&#34;570px&#34; height=&#34;208px&#34; /&gt;
+</description>
+        </item>
+        <item>
+        <title>人工智能数学符号</title>
+        <link>https://libertydream.github.io/p/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</link>
+        <pubDate>Sat, 01 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://libertydream.github.io/p/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</guid>
+        <description>&lt;img src="https://libertydream.github.io/p/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/notation-protocol.jpeg" alt="Featured image of post 人工智能数学符号" /&gt;&lt;p&gt;近年来，人工智能领域发展迅速。不同研究人员和研究小组之间的交流变得越来越重要。然而一个问题在于，出处不同的论文中符号使用并不统一。由此，本文对人工智能领域常用的一些数学符号提出了一般性的建议。&lt;/p&gt;
 &lt;h2 id=&#34;数据集&#34;&gt;数据集
 &lt;/h2&gt;&lt;p&gt;数据集 $S=\{ \mathbf{z}_i \}^n_{i=1}=\{(\mathbf{x}_i, \mathbf{y}_i) \}^n_{i=1}$ 从分布 $\mathcal{D}$ 中采样，定义在域 $\mathcal{Z} = \mathcal{X} \times \mathcal{Y}$ 上。&lt;/p&gt;
 &lt;ul&gt;
@@ -745,15 +799,6 @@ $$</description>
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;相册语法来自 &lt;a class=&#34;link&#34; href=&#34;https://typlog.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Typlog&lt;/a&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>关于</title>
-        <link>https://libertydream.github.io/%E5%85%B3%E4%BA%8E/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://libertydream.github.io/%E5%85%B3%E4%BA%8E/</guid>
-        <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
 </description>
         </item>
         <item>

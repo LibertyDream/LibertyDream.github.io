@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>一轩明月</copyright>
-        <lastBuildDate>Sat, 01 Mar 2025 12:01:39 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/categories/%E5%86%99%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>建议使用的人工智能数学符号</title>
-        <link>https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</link>
+        <lastBuildDate>Sat, 01 Mar 2025 17:59:00 +0000</lastBuildDate><atom:link href="https://libertydream.github.io/categories/%E5%86%99%E4%BD%9C/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>人工智能数学符号</title>
+        <link>https://libertydream.github.io/p/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</link>
         <pubDate>Sat, 01 Mar 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</guid>
-        <description>&lt;img src="https://libertydream.github.io/p/%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E7%9A%84%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/notation-protocol.jpeg" alt="Featured image of post 建议使用的人工智能数学符号" /&gt;&lt;p&gt;近年来，人工智能领域发展迅速。不同研究人员和研究小组之间的交流变得越来越重要。然而一个问题在于，出处不同的论文中符号使用并不统一。由此，本文对人工智能领域常用的一些数学符号提出了一般性的建议。&lt;/p&gt;
+        <guid>https://libertydream.github.io/p/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/</guid>
+        <description>&lt;img src="https://libertydream.github.io/p/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7/notation-protocol.jpeg" alt="Featured image of post 人工智能数学符号" /&gt;&lt;p&gt;近年来，人工智能领域发展迅速。不同研究人员和研究小组之间的交流变得越来越重要。然而一个问题在于，出处不同的论文中符号使用并不统一。由此，本文对人工智能领域常用的一些数学符号提出了一般性的建议。&lt;/p&gt;
 &lt;h2 id=&#34;数据集&#34;&gt;数据集
 &lt;/h2&gt;&lt;p&gt;数据集 $S=\{ \mathbf{z}_i \}^n_{i=1}=\{(\mathbf{x}_i, \mathbf{y}_i) \}^n_{i=1}$ 从分布 $\mathcal{D}$ 中采样，定义在域 $\mathcal{Z} = \mathcal{X} \times \mathcal{Y}$ 上。&lt;/p&gt;
 &lt;ul&gt;
