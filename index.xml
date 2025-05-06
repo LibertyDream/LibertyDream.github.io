@@ -709,6 +709,8 @@ $$&lt;h2 id=&#34;训练&#34;&gt;训练
 
 &lt;h2 id=&#34;示例&#34;&gt;示例
 &lt;/h2&gt;&lt;p&gt;&lt;strong&gt;行内公式：&lt;/strong&gt;  $\varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887…$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;块级公式：&lt;/strong&gt;&lt;br&gt;
+&lt;/p&gt;
 $$
  \varphi = 1 + \frac{1} {1 + \frac{1} {1 + \frac{1} {1 + \cdots} } }
 $$</description>

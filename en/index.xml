@@ -708,6 +708,8 @@ $$&lt;h2 id=&#34;training&#34;&gt;Training
 
 &lt;h2 id=&#34;examples&#34;&gt;Examples
 &lt;/h2&gt;&lt;p&gt;Inline math: $\varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887…$&lt;/p&gt;
+&lt;p&gt;Block math:
+&lt;/p&gt;
 $$
  \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } 
 $$</description>
